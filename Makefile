@@ -7,10 +7,10 @@ RM				=	rm -rfd
 
 LIBS_DIR		=	libs
 INCLUDES_DIR	=	includes
-CHECKER_DIR		=	src/checker
+P_S_DIR			=	src/push_swap
 
 CHECKER_RAW		=	checker.c
-CHECKER_FILES	=	$(addprefix $(CHECKER_DIR)/, $(CHECKER_RAW))
+CHECKER_FILES	=	$(addprefix $(P_S_DIR)/, $(CHECKER_RAW))
 
 .PHONY: clean fclean re libft makechecker
 
@@ -23,7 +23,7 @@ $(NAME): libft
 	@echo "name"
 
 $(BONUS_NAME): libft
-	cp -u $(CHECKER_DIR)/checker.h $(INCLUDES_DIR)/checker.h
+	cp -u $(P_S_DIR)/push_swap.h $(INCLUDES_DIR)/push_swap.h
 	$(CC) $(CHECKER_FILES) -L $(LIBS_DIR) -I $(INCLUDES_DIR) -lft -o $@
 
 libft:
