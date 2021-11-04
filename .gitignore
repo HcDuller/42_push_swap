@@ -1,5 +1,5 @@
-./includes
-./libs
 .vscode
+libs
+includes
 push_swap
 checker
