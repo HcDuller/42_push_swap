@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:51:52 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/04 12:06:35 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/04 13:45:58 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ t_stack	parse_input(int argc, char *argv[])
 			argc--;
 		}
 	}
+	return stack;
 }
 
 void	sa(t_p_swap *state)
@@ -262,6 +263,74 @@ void	rrr(t_p_swap *state)
 	reverse_shift_stack(&state->b);
 }
 
+void	replace_nl(char *str)
+{
+	int	l;
+
+	l = 0;
+	while (str[l])
+	{
+		if (str[l] == '\n')
+			str[l] = 0;
+		l++;
+	}
+}
+
+void	checker(t_p_swap *state)
+{
+	char	buf[4];
+	int		l;
+
+	while (1)
+	{
+		ft_bzero(&buf, 4);
+		read(0, &buf, 4);
+		buf[3] = 0;
+		replace_nl(&buf[0]);
+		l = ft_strlen(buf);
+		if (l > 1)
+		{
+			if (buf[0] == 's')
+			{
+				if (buf[1] == 'a')
+					sa(state);
+				else if (buf[1] == 'b')
+					sb(state);
+				else if (buf[1] == 's')
+					ss(state);
+			}
+			else if (buf[0] == 'p')
+			{
+				if (buf[1] == 'a')
+					pa(state);
+				else if (buf[1] == 'b')
+					pb(state);
+			}
+			else if (buf[0] == 'r')
+			{
+				if (l < 3)
+				{
+					if (buf[1] == 'a')
+						ra(state);
+					else if (buf[1] == 'b')
+						rb(state);
+					else if (buf[1] == 'r')
+						rr(state);
+				}
+				else if (buf[1] == 'r')
+				{
+					if (buf[2] == 'a')
+						rra(state);
+					else if (buf[2] == 'b')
+						rrb(state);
+					else if (buf[2] == 'r')
+						rrr(state);
+				}
+			}
+		}
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	int			argc_i;
@@ -269,28 +338,9 @@ int	main(int argc, char *argv[])
 	int			buf;
 	t_p_swap	state;
 
-	if (argc == 1)
-	{
-		ft_putstr_fd("At least one argument must be provided.\n", 1);
-		return (0);
-	}
-	else
-	{
-		argc_i = argc - 1;
-		state.a = new_stack(argc_i);
-		while (argc_i >= 1)
-		{
-			buf = strict_atoi(argv[argc_i], &is_ok);
-			push_to_stack(&state.a, buf);
-			argc_i--;
-		}
-		stack_shifter(&state.a, 1);
-		stack_shifter(&state.a, 1);
-		stack_shifter(&state.a, -1);
-		stack_shifter(&state.a, -1);
-		while (state.a.top > -1)
-			pop_from_stack(&state.a);
-		destroy_stack( &state.a);
-	}
+	state.a = parse_input(argc, argv);
+	checker(&state);
+	destroy_stack(&state.a);
+	destroy_stack(&state.b);
 	return (0);
 }

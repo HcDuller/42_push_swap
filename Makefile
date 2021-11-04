@@ -17,7 +17,7 @@ CHECKER_FILES	=	$(addprefix $(P_S_DIR)/, $(CHECKER_RAW))
 all: $(NAME) $(BONUS_NAME)
 	@echo $(CHECKER_FILES)
 
-makechecker: $(BONUS_NAME)
+bonus: $(BONUS_NAME)
 
 $(NAME): libft
 	@echo "name"
