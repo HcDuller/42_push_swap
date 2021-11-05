@@ -1,34 +1,79 @@
 NAME			=	push_swap
 BONUS_NAME		=	checker
 
-CC				=	clang -g
-AR				=	AR -rcs
+CC				=	clang
+AR				=	ar -rcs
 RM				=	rm -rfd
+CFLAGS			=	-g
+
 
 LIBS_DIR		=	libs
 INCLUDES_DIR	=	includes
-P_S_DIR			=	src/push_swap
+SRC_DIR			=	src
+OBJ_DIR			=	obj
+PS_DIR			=	push_swap
 
-CHECKER_RAW		=	checker.c
-CHECKER_FILES	=	$(addprefix $(P_S_DIR)/, $(CHECKER_RAW))
 
-.PHONY: clean fclean re libft makechecker
+PS_SRC_NAMES	=	is_space.c \
+					strict_atoi.c \
+					destroy_stack.c \
+					push_to_stack.c \
+					pop_from_stack.c \
+					swap_int.c \
+					swap_stack_top.c \
+					shift_stack.c \
+					reverse_shift_stack.c \
+					stack_shifter.c \
+					print_stack.c \
+					parse_input.c \
+					replace_nl.c \
+					sx.c \
+					px.c \
+					rx.c \
+					rrx.c 
+
+BONUS_SRC		=	checker.c
+CHECKER_RAW		=	checker.c \
+					sx.c \
+					px.c \
+					rx.c \
+					rrx.c
+P_S_RAW			=	push_swap.c
+
+PS_OBJ_FILES	=	$(addprefix $(OBJ_DIR)/, $(PS_SRC_NAMES:.c=.o))
+PS_SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(addprefix	$(PS_DIR)/, $(PS_SRC_NAMES))) 
+P_S_FILES		=	$(addprefix $(PS_DIR)/, $(P_S_RAW))
+CHECKER_FILES	=	$(addprefix $(PS_DIR)/, $(CHECKER_RAW))
+
+.PHONY: clean fclean re libft makechecker printtest cp_header
+
+printtest:
+	@echo a
 
 all: $(NAME) $(BONUS_NAME)
 	@echo $(CHECKER_FILES)
 
-bonus: $(BONUS_NAME)
+bonus: libft $(BONUS_NAME)
 
-$(NAME): libft
+$(LIBS_DIR)/libpush_swap.a: $(PS_OBJ_FILES) 
+	$(AR) $@ $(PS_OBJ_FILES)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/$(PS_DIR)/%.c
+	@mkdir -p $(INCLUDES_DIR) $(OBJ_DIR)
+	@cp -u $(SRC_DIR)/$(PS_DIR)/push_swap.h $(INCLUDES_DIR)/push_swap.h
+	$(CC) $(CFLAGS) -c $< -I$(INCLUDES_DIR) -o $@
+
+$(NAME):
+	cp -u $(PS_DIR)/push_swap.h $(INCLUDES_DIR)/push_swap.h
+	$(CC) $(CFLAGS) $(P_S_FILES) -L $(LIBS_DIR) -I $(INCLUDES_DIR) -lft -o $@
 	@echo "name"
 
-$(BONUS_NAME): libft
-	cp -u $(P_S_DIR)/push_swap.h $(INCLUDES_DIR)/push_swap.h
-	$(CC) $(CHECKER_FILES) -L $(LIBS_DIR) -I $(INCLUDES_DIR) -lft -o $@
+$(BONUS_NAME): $(LIBS_DIR)/libpush_swap.a
+	$(CC) -v $(CFLAGS) $(BONUS_SRC) -L./$(LIBS_DIR) -lpush_swap -lft -I$(INCLUDES_DIR) -o $(BONUS_NAME)
 
-libft:
+libft: 
+	@mkdir -p $(LIBS_DIR) $(INCLUDES_DIR)
 	make -C ./src/libft
-	mkdir -p $(LIBS_DIR) includes
 	cp ./src/libft/libft.h $(INCLUDES_DIR)/libft.h
 	cp ./src/libft/libft.a $(LIBS_DIR)/libft.a
 
@@ -37,4 +82,4 @@ clean:
 
 fclean: clean
 	make fclean -C ./src/libft
-	$(RM) $(INCLUDES_DIR) $(LIBS_DIR)
+	$(RM) $(INCLUDES_DIR) $(LIBS_DIR) $(OBJ_DIR)
