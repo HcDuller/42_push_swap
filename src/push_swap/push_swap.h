@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/05 18:05:10 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:51:58 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,21 @@ void	reverse_shift_stack(t_stack *stack);
 void	stack_shifter(t_stack *stack, int direction);
 void	print_stack(t_stack stack);
 void	replace_nl(char *str);
+/**Swap "stack a" top value with its second value, if it exists.*/
 void	sa(t_p_swap *state);
+/**Swap "stack b" top value with its second value, if it exists.*/
 void	sb(t_p_swap *state);
+/**Performs sa and sb simultaneously.*/
 void	ss(t_p_swap *state);
+/**Pops "stack a" top value and pushed it to "stack b"*/
 void	pa(t_p_swap *state);
+/**Pops "stack b" top value and pushed it to "stack a"*/
 void	pb(t_p_swap *state);
+/**Shift up all elements of "stack a" by 1. The first element becomes the last one*/
 void	ra(t_p_swap *state);
+/**Shift up all elements of "stack b" by 1. The first element becomes the last one*/
 void	rb(t_p_swap *state);
+/**Performs 'ra' and 'rb' simultaneously*/
 void	rr(t_p_swap *state);
 void	rra(t_p_swap *state);
 void	rrb(t_p_swap *state);

@@ -16,6 +16,7 @@ PS_DIR			=	push_swap
 
 PS_SRC_NAMES	=	is_space.c \
 					strict_atoi.c \
+					new_stack.c \
 					destroy_stack.c \
 					push_to_stack.c \
 					pop_from_stack.c \
@@ -38,6 +39,7 @@ CHECKER_RAW		=	checker.c \
 					px.c \
 					rx.c \
 					rrx.c
+
 P_S_RAW			=	push_swap.c
 
 PS_OBJ_FILES	=	$(addprefix $(OBJ_DIR)/, $(PS_SRC_NAMES:.c=.o))
@@ -51,7 +53,7 @@ printtest:
 	@echo a
 
 all: $(NAME) $(BONUS_NAME)
-	@echo $(CHECKER_FILES)
+	
 
 bonus: libft $(BONUS_NAME)
 
@@ -63,13 +65,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/$(PS_DIR)/%.c
 	@cp -u $(SRC_DIR)/$(PS_DIR)/push_swap.h $(INCLUDES_DIR)/push_swap.h
 	$(CC) $(CFLAGS) -c $< -I$(INCLUDES_DIR) -o $@
 
-$(NAME):
-	cp -u $(PS_DIR)/push_swap.h $(INCLUDES_DIR)/push_swap.h
-	$(CC) $(CFLAGS) $(P_S_FILES) -L $(LIBS_DIR) -I $(INCLUDES_DIR) -lft -o $@
-	@echo "name"
+$(NAME): $(LIBS_DIR)/libpush_swap.a $(P_S_RAW)
+	$(CC) $(CFLAGS) $(P_S_RAW) -L./$(LIBS_DIR) -lpush_swap -lft -I$(INCLUDES_DIR) -o $(NAME)
 
-$(BONUS_NAME): $(LIBS_DIR)/libpush_swap.a
-	$(CC) -v $(CFLAGS) $(BONUS_SRC) -L./$(LIBS_DIR) -lpush_swap -lft -I$(INCLUDES_DIR) -o $(BONUS_NAME)
+$(BONUS_NAME): $(LIBS_DIR)/libpush_swap.a $(BONUS_SRC)
+	$(CC) $(CFLAGS) $(BONUS_SRC) -L./$(LIBS_DIR) -lpush_swap -lft -I$(INCLUDES_DIR) -o $(BONUS_NAME)
 
 libft: 
 	@mkdir -p $(LIBS_DIR) $(INCLUDES_DIR)
