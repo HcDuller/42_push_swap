@@ -4,7 +4,7 @@ BONUS_NAME		=	checker
 CC				=	clang
 AR				=	ar -rcs
 RM				=	rm -rfd
-CFLAGS			=	-g
+CFLAGS			=	-g -Wall -Wextra -Werror
 
 
 LIBS_DIR		=	libs
@@ -26,6 +26,7 @@ PS_SRC_NAMES	=	is_space.c \
 					reverse_shift_stack.c \
 					stack_shifter.c \
 					print_stack.c \
+					print_state.c \
 					parse_input.c \
 					replace_nl.c \
 					sx.c \
@@ -47,15 +48,14 @@ PS_SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(addprefix	$(PS_DIR)/, $(PS_SRC_NAMES))
 P_S_FILES		=	$(addprefix $(PS_DIR)/, $(P_S_RAW))
 CHECKER_FILES	=	$(addprefix $(PS_DIR)/, $(CHECKER_RAW))
 
-.PHONY: clean fclean re libft makechecker printtest cp_header
+.PHONY: clean fclean re libft makechecker printtest re
 
 printtest:
 	@echo a
 
-all: $(NAME) $(BONUS_NAME)
+all: libft $(NAME)
 	
-
-bonus: libft $(BONUS_NAME)
+bonus: all $(BONUS_NAME)
 
 $(LIBS_DIR)/libpush_swap.a: $(PS_OBJ_FILES) 
 	$(AR) $@ $(PS_OBJ_FILES)
@@ -83,3 +83,5 @@ clean:
 fclean: clean
 	make fclean -C ./src/libft
 	$(RM) $(INCLUDES_DIR) $(LIBS_DIR) $(OBJ_DIR)
+
+re: fclean all

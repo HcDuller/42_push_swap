@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/08 17:51:58 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/09 18:43:21 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,14 @@ typedef struct s_p_swap
 {
 	t_stack	a;
 	t_stack	b;
+	int		moves;
 } t_p_swap;
+
+typedef	struct s_tuple
+{
+	int	a;
+	int	b;
+} t_tuple;
 
 int		is_space(char c);
 int		strict_atoi(char *str, int *is_ok);
@@ -38,6 +45,7 @@ void	shift_stack(t_stack *stack);
 void	reverse_shift_stack(t_stack *stack);
 void	stack_shifter(t_stack *stack, int direction);
 void	print_stack(t_stack stack);
+void	print_state(t_p_swap state);
 void	replace_nl(char *str);
 /**Swap "stack a" top value with its second value, if it exists.*/
 void	sa(t_p_swap *state);
