@@ -18,6 +18,7 @@ PS_SRC_NAMES	=	is_space.c \
 					strict_atoi.c \
 					new_stack.c \
 					destroy_stack.c \
+					destroy_state.c \
 					push_to_stack.c \
 					pop_from_stack.c \
 					swap_int.c \
@@ -35,18 +36,13 @@ PS_SRC_NAMES	=	is_space.c \
 					rrx.c 
 
 BONUS_SRC		=	checker.c
-CHECKER_RAW		=	checker.c \
-					sx.c \
-					px.c \
-					rx.c \
-					rrx.c
 
 P_S_RAW			=	push_swap.c
 
 PS_OBJ_FILES	=	$(addprefix $(OBJ_DIR)/, $(PS_SRC_NAMES:.c=.o))
 PS_SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(addprefix	$(PS_DIR)/, $(PS_SRC_NAMES))) 
 P_S_FILES		=	$(addprefix $(PS_DIR)/, $(P_S_RAW))
-CHECKER_FILES	=	$(addprefix $(PS_DIR)/, $(CHECKER_RAW))
+
 
 .PHONY: clean fclean re libft makechecker printtest re
 

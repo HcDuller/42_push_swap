@@ -6,12 +6,15 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/09 18:43:21 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/10 19:27:31 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <libft.h>
+
+#define TO_B 1
+#define TO_A -1
 
 typedef struct s_stack
 {
@@ -20,18 +23,21 @@ typedef struct s_stack
 	int	size;
 } t_stack;
 
-typedef struct s_p_swap
-{
-	t_stack	a;
-	t_stack	b;
-	int		moves;
-} t_p_swap;
-
 typedef	struct s_tuple
 {
 	int	a;
 	int	b;
+	int direction;
 } t_tuple;
+
+typedef struct s_p_swap
+{
+	t_stack	a;
+	t_stack	b;
+	t_tuple	*map;
+	int		moves;
+} t_p_swap;
+
 
 int		is_space(char c);
 int		strict_atoi(char *str, int *is_ok);
@@ -66,4 +72,5 @@ void	rr(t_p_swap *state);
 void	rra(t_p_swap *state);
 void	rrb(t_p_swap *state);
 void	rrr(t_p_swap *state);
-t_p_swap	parse_input(int argc, char *argv[]);
+t_p_swap	new_state_from_input(int argc, char *argv[]);
+void	destroy_state(t_p_swap *state);
