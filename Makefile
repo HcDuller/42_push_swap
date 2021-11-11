@@ -26,6 +26,7 @@ PS_SRC_NAMES	=	is_space.c \
 					shift_stack.c \
 					reverse_shift_stack.c \
 					stack_shifter.c \
+					sort_two_sized_stack.c \
 					print_stack.c \
 					print_state.c \
 					parse_input.c \

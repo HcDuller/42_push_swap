@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/10 19:24:54 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/11 00:03:07 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@ int	stack_is_sorted(t_stack stk)
 	}
 	return	(1);
 }
-
-/**sort stacks of size 2 (yeeeep, that's it)*/
-void	sort_two_sized_stack(t_p_swap *state)
-{
-	if (state->a.stack[1] > state->a.stack[0])
-		sa(state);
-	print_state(*state);
-}
-
 /**sort stacks of size 3 (yeeeep, that's it)*/
 void	sort_three_sized_stack(t_p_swap *state)
 {
@@ -225,65 +216,48 @@ void	mutate_merge_sequence(t_tuple **input)
 	free(*input);
 	*input = new_tuple;
 }
+
+void	do_a_merge(t_p_swap *state)
+{
+	int	i;
+
+	i = 0;
+	if (state->map->direction == TO_B)
+	{
+		while (state->map[i].a != 0)
+		{
+			merge_into_b(state, state->map[i].a, state->map[i].b);
+			i++;
+		}
+	}
+	else if (state->map->direction == TO_A)
+	{
+		while (state->map[i].a != 0)
+		{
+			merge_into_a(state, state->map[i].a, state->map[i].b);
+			i++;
+		}
+	}
+}
 int	main(int argc, char *argv[])
 {
 	t_p_swap	state;
-	t_tuple		*tuples;
-	int			i[2];
+	//t_tuple		*tuples;
 
 	state = new_state_from_input(argc, argv);
 		ft_putstr_fd("Start\n", 1);
-	print_state(state);
 	if (state.a.size == 2)
 		sort_two_sized_stack(&state);
 	else if (state.a.size == 3)
 		sort_three_sized_stack(&state);
 	else if (state.a.size > 3)
 	{
-		tuples = ft_calloc(state.a.size / 2 + 1, sizeof(t_tuple));
-		i[0] = 0;
-		i[1] = 0;
-		while (i[1]< state.a.size)
+		while (!stack_is_sorted(state.a) || state.b.top > -1)
 		{
-			if (state.a.size - i[1] > 3 || state.a.size - i[1] == 2)
-			{
-				tuples[i[0]].a = 1;
-				tuples[i[0]].b = 1;
-			}
-			else if (state.a.size - i[1] ==  3)
-			{
-				tuples[0].a++;
-				i[1]++;
-				sort_two_sized_stack(&state);
-				tuples[i[0]].a = 1;
-				tuples[i[0]].b = 1;
-			}
-			i[1] = i[1] + tuples[i[0]].a + tuples[i[0]].b;
-			tuples[i[0]].direction = TO_B;
-			i[0]++;
-		}
-		i[0] = 0;
-		while (tuples[i[0]].a != 0)
-		{
-			merge_into_b(&state,tuples[i[0]].a,tuples[i[0]].b);
-			i[0]++;
-		}
-		mutate_merge_sequence(&tuples);
-		i[0] = 0;
-		while (tuples[i[0]].a != 0)
-		{
-			merge_into_a(&state,tuples[i[0]].a,tuples[i[0]].b);
-			i[0]++;
-		}
-		mutate_merge_sequence(&tuples);
-		i[0] = 0;
-		while (tuples[i[0]].a != 0)
-		{
-			merge_into_b(&state,tuples[i[0]].a,tuples[i[0]].b);
-			i[0]++;
+			do_a_merge(&state);
+			mutate_merge_sequence(&state.map);
 		}
 	}
-	print_state(state);
 	destroy_state(&state);
 	return (0);
 }

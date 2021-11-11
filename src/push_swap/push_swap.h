@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/10 19:27:31 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/10 19:56:13 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,5 @@ void	rrb(t_p_swap *state);
 void	rrr(t_p_swap *state);
 t_p_swap	new_state_from_input(int argc, char *argv[]);
 void	destroy_state(t_p_swap *state);
+/**sort stacks of size 2 (yeeeep, that's it)*/
+void	sort_two_sized_stack(t_p_swap *state);
