@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/11 00:03:07 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/11 19:21:06 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,16 @@ void	merge_into_a(t_p_swap *state, int a_size, int b_size)
 	}
 }
 
+int	count_tuple_elements(t_tuple *map)
+{
+	int	total_elements;
+	int	index;
+
+	index = 0;
+	total_elements = 0;
+	map = NULL;
+	return total_elements;
+}
 void	mutate_merge_sequence(t_tuple **input)
 {
 	int		total_elements;
@@ -239,13 +249,13 @@ void	do_a_merge(t_p_swap *state)
 		}
 	}
 }
+
 int	main(int argc, char *argv[])
 {
 	t_p_swap	state;
-	//t_tuple		*tuples;
 
 	state = new_state_from_input(argc, argv);
-		ft_putstr_fd("Start\n", 1);
+	ft_putstr_fd("Start\n", 1);
 	if (state.a.size == 2)
 		sort_two_sized_stack(&state);
 	else if (state.a.size == 3)

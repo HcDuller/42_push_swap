@@ -34,7 +34,14 @@ PS_SRC_NAMES	=	is_space.c \
 					sx.c \
 					px.c \
 					rx.c \
-					rrx.c 
+					rrx.c \
+					create_op_item.c \
+					add_to_op_list.c \
+					remove_item_from_op_list.c \
+					destroy_op_list.c \
+					op_list_size.c \
+					get_first_op_item.c \
+					get_last_op_item.c 
 
 BONUS_SRC		=	checker.c
 
