@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/11 18:52:34 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/12 13:34:56 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define TO_B 1
 # define TO_A -1
 
-typedef enum e_operator {pa, pb, ra, rb, rr, rra, rrb, rrr}	t_operator;
+typedef enum e_operator {PA, PB, RA, RB, RR, RRA, RRB, RRR}	t_operator;
 
 typedef struct s_op_list
 {
