@@ -29,7 +29,7 @@ PS_SRC_NAMES	=	is_space.c \
 					sort_two_sized_stack.c \
 					print_stack.c \
 					print_state.c \
-					parse_input.c \
+					new_state_from_input.c \
 					replace_nl.c \
 					sx.c \
 					px.c \

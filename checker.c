@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:51:52 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/08 17:24:19 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/16 12:38:07 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int argc, char *argv[])
 	int			buf;
 	t_p_swap	state;
 
-	state = parse_input(argc, argv);
+	state = new_state_from_input(argc, argv);
 	print_stack(state.a);
 	manual_checker(&state);
 	destroy_stack(&state.a);
