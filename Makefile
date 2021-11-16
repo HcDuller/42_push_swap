@@ -41,6 +41,7 @@ PS_SRC_NAMES	=	is_space.c \
 					destroy_op_list.c \
 					op_list_size.c \
 					get_first_op_item.c \
+					build_base_merge_list.c \
 					get_last_op_item.c 
 
 BONUS_SRC		=	checker.c
@@ -52,10 +53,7 @@ PS_SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(addprefix	$(PS_DIR)/, $(PS_SRC_NAMES))
 P_S_FILES		=	$(addprefix $(PS_DIR)/, $(P_S_RAW))
 
 
-.PHONY: clean fclean re libft makechecker printtest re
-
-printtest:
-	@echo a
+.PHONY: clean fclean re libft re
 
 all: libft $(NAME)
 	

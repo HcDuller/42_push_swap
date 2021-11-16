@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/11 19:21:06 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/16 13:26:07 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,6 +250,15 @@ void	do_a_merge(t_p_swap *state)
 	}
 }
 
+void	merge_sort(t_p_swap *state)
+{
+	build_base_merge_list(state);
+	while (!stack_is_sorted(state->a) || state->b.top > -1)
+	{
+		do_a_merge(state);
+		mutate_merge_sequence(&state->map);
+	}
+}
 int	main(int argc, char *argv[])
 {
 	t_p_swap	state;
@@ -262,11 +271,7 @@ int	main(int argc, char *argv[])
 		sort_three_sized_stack(&state);
 	else if (state.a.size > 3)
 	{
-		while (!stack_is_sorted(state.a) || state.b.top > -1)
-		{
-			do_a_merge(&state);
-			mutate_merge_sequence(&state.map);
-		}
+		merge_sort(&state);
 	}
 	destroy_state(&state);
 	return (0);
