@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/16 13:27:23 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/16 21:26:49 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_p_swap
 {
 	t_stack	a;
 	t_stack	b;
+	t_stack q_s_groups;
 	t_tuple	*map;
 	int		*ordered_stack;
 	int		moves;
