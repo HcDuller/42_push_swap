@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/18 16:49:04 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:35:09 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_p_swap
 	t_tuple		*map;
 	t_op_list	*operations;
 	int			*ordered_stack;
+	int			*keep_in_a;
+	int			*send_to_b;
 	int			moves;
 }	t_p_swap;
 
@@ -106,4 +108,11 @@ void		destroy_op_list(t_op_list **any_op_item);
 int			op_list_size(t_op_list *any_op_item);
 t_op_list	*get_first_op_item(t_op_list *any_op_item);
 t_op_list	*get_last_op_item(t_op_list *any_op_item);
+/**Returns the index of a <value> 
+ * within a given <array> 
+ * of size <array_size>
+ * if <value> is not found, 
+ * returns -1 instead. */
+int		get_index_of(int *array, int array_size, int value);
+void	build_keep_array(t_p_swap *state);
 #endif

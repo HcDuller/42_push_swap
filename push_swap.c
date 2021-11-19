@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/18 23:35:53 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:43:39 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -414,24 +414,27 @@ void	coupled_pbs(t_p_swap *state)
 void	optmize_op_list(t_op_list *any_op)
 {
 
-	while (any_op->previous != NULL)
+	if (any_op)
 	{
-		any_op = any_op->previous;
-	}
-	while (any_op->next != NULL)
-	{
-		if ((any_op->operator == RA && any_op->next->operator == RRA) || \
-		(any_op->operator == RRA && any_op->next->operator == RA) || \
-		(any_op->operator == RB && any_op->next->operator == RRB) || \
-		(any_op->operator == RRB && any_op->next->operator == RB) \
-		)
+		while (any_op->previous != NULL)
 		{
-			any_op = remove_item_from_op_list(any_op);
-			any_op = remove_item_from_op_list(any_op);
 			any_op = any_op->previous;
 		}
-		else
-			any_op = any_op->next;
+		while (any_op->next != NULL)
+		{
+			if ((any_op->operator == RA && any_op->next->operator == RRA) || \
+			(any_op->operator == RRA && any_op->next->operator == RA) || \
+			(any_op->operator == RB && any_op->next->operator == RRB) || \
+			(any_op->operator == RRB && any_op->next->operator == RB) \
+			)
+			{
+				any_op = remove_item_from_op_list(any_op);
+				any_op = remove_item_from_op_list(any_op);
+				any_op = any_op->previous;
+			}
+			else
+				any_op = any_op->next;
+		}
 	}
 }
 
@@ -490,11 +493,15 @@ void	quick_heap_sort(t_p_swap *state)
 		pop_from_stack(&state->q_s_groups);
 	}
 }
-
+/*		Due to the mapping of elements (replacing numbers with indexes),
+	it might be necessary to change the ordered arrays types, from int 
+	to unsigned int.
+		If for instance -1 to INT_MAX <limits.h> are provided, problems may happen.
+*/
 int	main(int argc, char *argv[])
 {
 	t_p_swap	state;
-
+	
 	state = new_state_from_input(argc, argv);
 	if (state.a.size == 2)
 		sort_two_sized_stack(&state);
