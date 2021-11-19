@@ -6,13 +6,16 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/18 00:14:33 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/18 23:35:53 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
 /**Evaluates if given stack is already sorted (top to bottom, smaller to greater)*/
+
+static void	optmize_op_list(t_op_list *any_op);
+
 int	stack_is_sorted(t_stack stk)
 {
 	int	top;
@@ -65,7 +68,6 @@ void	merge_into_b(t_p_swap *state, int a_size, int b_size)
 				if (stk->stack[stk->top] < stk->stack[stk->top - a_size])
 				{
 					pb(state);
-					print_state(*state);
 					a_i--;
 					a_size--;
 				}
@@ -75,16 +77,13 @@ void	merge_into_b(t_p_swap *state, int a_size, int b_size)
 					while (aux > 0)
 					{
 						ra(state);
-						print_state(*state);
 						aux--;
 					}
 					pb(state);
-					print_state(*state);
 					b_size--;
 					while (aux < a_size)
 					{
 						rra(state);
-						print_state(*state);
 						aux++;
 					}
 				}
@@ -94,7 +93,6 @@ void	merge_into_b(t_p_swap *state, int a_size, int b_size)
 				while (a_size > 0)
 				{
 					pb(state);
-					print_state(*state);
 					a_size--;
 				}
 			}
@@ -104,7 +102,6 @@ void	merge_into_b(t_p_swap *state, int a_size, int b_size)
 			while (b_size > 0)
 			{
 				pb(state);
-				print_state(*state);
 				b_size--;
 			}
 		}
@@ -129,7 +126,6 @@ void	merge_into_a(t_p_swap *state, int a_size, int b_size)
 				if (stk->stack[stk->top] > stk->stack[stk->top - a_size])
 				{
 					pa(state);
-					print_state(*state);
 					a_size--;
 				}
 				else
@@ -138,16 +134,13 @@ void	merge_into_a(t_p_swap *state, int a_size, int b_size)
 					while (aux > 0)
 					{
 						rb(state);
-						print_state(*state);
 						aux--;
 					}
 					pa(state);
-					print_state(*state);
 					b_size--;
 					while (aux < a_size)
 					{
 						rrb(state);
-						print_state(*state);
 						aux++;
 					}
 				}
@@ -157,7 +150,6 @@ void	merge_into_a(t_p_swap *state, int a_size, int b_size)
 				while (a_size > 0)
 				{
 					pa(state);
-					print_state(*state);
 					a_size--;
 				}
 			}
@@ -167,7 +159,6 @@ void	merge_into_a(t_p_swap *state, int a_size, int b_size)
 			while (b_size > 0)
 			{
 				pa(state);
-				print_state(*state);
 				b_size--;
 			}
 		}
@@ -333,6 +324,8 @@ int		get_greater_values_in_group(t_p_swap *state, int *first, int *second)
 	if (n_members > 1)
 	{
 		i = 0;
+		if (*first == 0)
+			*second = 1;
 		while (i < n_members)
 		{
 			if (i != *first)
@@ -362,24 +355,19 @@ void	coupled_pbs(t_p_swap *state)
 			while (indexes[1] > 0)
 			{
 				rb(state);
-				//add_to_op_list(ops, RB);
 				indexes[1]--;
 				indexes[2]++;
 			}
 			pa(state);
-			//add_to_op_list(ops, PA);
 			state->q_s_groups.stack[state->q_s_groups.top]--;
 			while (indexes[0] > 0)
 			{
 				rb(state);
-				//add_to_op_list(ops, RB);
 				indexes[0]--;
 				indexes[2]++;
 			}
 			pa(state);
-			//add_to_op_list(ops, PA);
 			sa(state);
-			//add_to_op_list(ops, SA);
 			state->q_s_groups.stack[state->q_s_groups.top]--;
 		}
 		else
@@ -388,24 +376,18 @@ void	coupled_pbs(t_p_swap *state)
 			while (indexes[0] > 0)
 			{
 				rb(state);
-				//add_to_op_list(ops, RB);
 				indexes[0]--;
 				indexes[2]++;
 			}
 			pa(state);
-			indexes[2]--;
-			//add_to_op_list(ops, PA);
 			state->q_s_groups.stack[state->q_s_groups.top]--;
 			while (indexes[1] > 0)
 			{
 				rb(state);
-				//add_to_op_list(ops, RB);
 				indexes[1]--;
 				indexes[2]++;
 			}
 			pa(state);
-			indexes[2]--;
-			//add_to_op_list(ops, PA);
 			state->q_s_groups.stack[state->q_s_groups.top]--;
 		}
 		
@@ -416,19 +398,40 @@ void	coupled_pbs(t_p_swap *state)
 		while (indexes[0] > 0)
 		{
 			rb(state);
-			//add_to_op_list(ops, RB);
 			indexes[0]--;
 			indexes[2]++;
 		}
 		pa(state);
-		//add_to_op_list(ops, PA);
 		state->q_s_groups.stack[state->q_s_groups.top]--;
 	}
 	while (indexes[2] > 0)
 	{
 		rrb(state);
-		//add_to_op_list(ops, RRB);
 		indexes[2]--;
+	}
+}
+
+void	optmize_op_list(t_op_list *any_op)
+{
+
+	while (any_op->previous != NULL)
+	{
+		any_op = any_op->previous;
+	}
+	while (any_op->next != NULL)
+	{
+		if ((any_op->operator == RA && any_op->next->operator == RRA) || \
+		(any_op->operator == RRA && any_op->next->operator == RA) || \
+		(any_op->operator == RB && any_op->next->operator == RRB) || \
+		(any_op->operator == RRB && any_op->next->operator == RB) \
+		)
+		{
+			any_op = remove_item_from_op_list(any_op);
+			any_op = remove_item_from_op_list(any_op);
+			any_op = any_op->previous;
+		}
+		else
+			any_op = any_op->next;
 	}
 }
 
@@ -436,17 +439,22 @@ void	quick_heap_sort(t_p_swap *state)
 {
 	int	last_index;
 	int	pivot_index;
-	int	decrement;
+	int	drecrement;
 	int	stk_top;
 	int	*ordered;
 
 	last_index = state->a.top;
-	decrement = last_index;
 	ordered = state->ordered_stack;
-	while (decrement > 0 && state->a.top > 1)
+	drecrement = 0.15 * state->a.size;
+	pivot_index = 0;
+	while (state->a.top > 1)
 	{
-		decrement = decrement / 2;
-		pivot_index = last_index - decrement;
+		drecrement *= 0.9;
+		if (drecrement < 10)
+			drecrement = 10;
+		pivot_index += drecrement;
+		if (pivot_index > last_index)
+			pivot_index = last_index;
 		push_to_stack(&(state->q_s_groups), 0);
 		while (stack_has_lesses_values_than_pivot(state->a, ordered[pivot_index]))
 		{
@@ -455,18 +463,29 @@ void	quick_heap_sort(t_p_swap *state)
 			{
 				pb(state);
 				state->q_s_groups.stack[state->q_s_groups.top]++;
+				//pequena "pre-ordenacao em b" ajudou POUQUISSIMO
+				if (state->b.top > 0)
+				{
+					if (state->b.stack[state->b.top] < state->b.stack[state->b.top - 1])
+					sb(state);
+				}
 			}
 			else
+			{
 				ra(state);
+			}
+			if (state->a.top == 1)
+			{
+				if (state->a.stack[0] < state->a.stack[1])
+					sa(state);
+			}
 		}
-		print_state(*state);
 	}
 	while (state->q_s_groups.top > -1)
 	{
 		while (state->q_s_groups.stack[state->q_s_groups.top] != 0)
 		{
 			coupled_pbs(state);
-			print_state(*state);
 		}
 		pop_from_stack(&state->q_s_groups);
 	}
@@ -477,7 +496,6 @@ int	main(int argc, char *argv[])
 	t_p_swap	state;
 
 	state = new_state_from_input(argc, argv);
-	ft_putstr_fd("Start\n", 1);
 	if (state.a.size == 2)
 		sort_two_sized_stack(&state);
 	else if (state.a.size == 3)
@@ -487,6 +505,8 @@ int	main(int argc, char *argv[])
 		//merge_sort(&state);
 		quick_heap_sort(&state);
 	}
+	optmize_op_list(state.operations);
+	print_op_list(state.operations);
 	destroy_state(&state);
 	return (0);
 }

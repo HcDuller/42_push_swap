@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/16 21:26:49 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:49:04 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define TO_B 1
 # define TO_A -1
 
-typedef enum e_operator {PA, PB, RA, RB, RR, RRA, RRB, RRR}	t_operator;
+typedef enum e_operator {PA, PB, SA, SB, SS, RA, RB, RR, RRA, RRB, RRR}	t_operator;
 
 typedef struct s_op_list
 {
@@ -44,12 +44,13 @@ typedef struct s_tuple
 
 typedef struct s_p_swap
 {
-	t_stack	a;
-	t_stack	b;
-	t_stack q_s_groups;
-	t_tuple	*map;
-	int		*ordered_stack;
-	int		moves;
+	t_stack		a;
+	t_stack		b;
+	t_stack		q_s_groups;
+	t_tuple		*map;
+	t_op_list	*operations;
+	int			*ordered_stack;
+	int			moves;
 }	t_p_swap;
 
 int			is_space(char c);
@@ -94,7 +95,13 @@ void		build_base_merge_list(t_p_swap *state);
 void		sort_two_sized_stack(t_p_swap *state);
 t_op_list	*create_op_item(t_operator operator);
 t_op_list	*add_to_op_list(t_op_list *last_operator, t_operator new_operator);
+/**Remove an operation from the list.
+ * returns: Next operator, if it exists, if not:
+ * 			Previous Operator, if it exists, if not
+ * 			NULL
+*/
 t_op_list	*remove_item_from_op_list(t_op_list	*any_operator);
+void		print_op_list(t_op_list	*any_op_item);
 void		destroy_op_list(t_op_list **any_op_item);
 int			op_list_size(t_op_list *any_op_item);
 t_op_list	*get_first_op_item(t_op_list *any_op_item);

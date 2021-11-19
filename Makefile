@@ -42,7 +42,8 @@ PS_SRC_NAMES	=	is_space.c \
 					op_list_size.c \
 					get_first_op_item.c \
 					build_base_merge_list.c \
-					get_last_op_item.c 
+					get_last_op_item.c \
+					print_operations.c
 
 BONUS_SRC		=	checker.c
 

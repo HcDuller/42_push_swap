@@ -3,3 +3,4 @@ libs
 includes
 push_swap
 checker
+pyviz.py
