@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/19 19:43:39 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/23 14:15:42 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -340,7 +340,7 @@ int		get_greater_values_in_group(t_p_swap *state, int *first, int *second)
 	return (1);
 }
 
-void	coupled_pbs(t_p_swap *state)
+void	coupled_pas(t_p_swap *state)
 {
 	t_op_list	*ops;
 	int			indexes[3];
@@ -438,6 +438,23 @@ void	optmize_op_list(t_op_list *any_op)
 	}
 }
 
+void	push_region_to_b(t_p_swap *state, int pivot_value)
+{
+	int	top_value;
+
+	while (stack_has_lesses_values_than_pivot(state->a, pivot_value))
+	{
+		top_value = get_stack_top(&(state->a));
+		if (top_value < pivot_value)
+		{
+			pb(state);
+			state->q_s_groups.stack[state->q_s_groups.top]++;
+		}
+		else
+			ra(state);
+	}
+}
+
 void	quick_heap_sort(t_p_swap *state)
 {
 	int	last_index;
@@ -488,7 +505,7 @@ void	quick_heap_sort(t_p_swap *state)
 	{
 		while (state->q_s_groups.stack[state->q_s_groups.top] != 0)
 		{
-			coupled_pbs(state);
+			coupled_pas(state);
 		}
 		pop_from_stack(&state->q_s_groups);
 	}

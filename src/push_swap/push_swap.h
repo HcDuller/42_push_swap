@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/19 19:35:09 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/23 14:34:22 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ typedef struct s_p_swap
 	t_stack		a;
 	t_stack		b;
 	t_stack		q_s_groups;
+	t_stack		keeper;
 	t_tuple		*map;
 	t_op_list	*operations;
 	int			*ordered_stack;
-	int			*keep_in_a;
-	int			*send_to_b;
+	int			keeper_cap;
 	int			moves;
 }	t_p_swap;
 
@@ -61,6 +61,7 @@ t_stack		new_stack(int size);
 void		destroy_stack(t_stack *stack);
 int			push_to_stack(t_stack	*stack, int element);
 int			pop_from_stack(t_stack	*stack);
+int			get_stack_top(t_stack *stk);
 void		swap_int(int *a, int *b);
 void		swap_stack_top(t_stack *stack);
 void		shift_stack(t_stack *stack);
@@ -113,6 +114,6 @@ t_op_list	*get_last_op_item(t_op_list *any_op_item);
  * of size <array_size>
  * if <value> is not found, 
  * returns -1 instead. */
-int		get_index_of(int *array, int array_size, int value);
-void	build_keep_array(t_p_swap *state);
+int			get_index_of(int *array, int array_size, int value);
+void		build_keep_array(t_p_swap *state);
 #endif
