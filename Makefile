@@ -66,6 +66,10 @@ PS_SRC_NAMES	=	is_space.c \
 					section_sort_from_region.c \
 					quick_heap_sort.c \
 					swap_int_array_values.c \
+					find_resonable_sequence_in_a.c \
+					copy_stack_a_to_b.c \
+					heap_sort_by_greater.c \
+					position_zero_at_top.c
 
 BONUS_SRC		=	checker.c
 

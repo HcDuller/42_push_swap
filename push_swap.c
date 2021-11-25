@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/24 21:25:26 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:08:16 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,6 @@ void	push_filtered_region_to_b(t_p_swap *state, int pivot_value)
 
 void	quick_merge_sort(t_p_swap *state)
 {
-	//int	last_index;
-	//int	pivot_index;
-	//int	drecrement;
-	//int	*ordered;
-	//int	percentile[8];
 	int	i;
 	int	top_value;
 	int	keep_i;
@@ -88,35 +83,6 @@ void	quick_merge_sort(t_p_swap *state)
 			ra(state);
 		i--;
 	}
-	//last_index = state->a.top;
-	//ordered = state->ordered_stack;
-	//drecrement = 0.3 * state->a.size;
-	//pivot_index = 0;
-	//percentile[0] = state->a.top / (100 / 15);
-	//percentile[1] = state->a.top / (100 / 15) + percentile[0];
-	//percentile[2] = state->a.top / (100 / 15) + percentile[1];
-	//percentile[3] = state->a.top / (100 / 15) + percentile[2];
-	//percentile[4] = state->a.top / 10;
-	//percentile[5] = state->a.top / 10 + percentile[4];
-	//percentile[6] = state->a.top / 10 + percentile[5];
-	//percentile[7] = state->a.top ;
-	//i = 0;
-	//while (i < 8)
-	//{
-	//	push_filtered_region_to_b(state, ordered[percentile[i]]);
-	//	i++;
-	//}
-
-	//while (state->a.top != state->keeper.top) //state->a.top != state->keeper.top
-	//{
-	//	drecrement *= 0.9;
-	//	if (drecrement < 10)
-	//		drecrement = 10;
-	//	pivot_index += drecrement;
-	//	if (pivot_index > last_index)
-	//		pivot_index = last_index;
-	//	push_filtered_region_to_b(state, ordered[pivot_index]);
-	//}
 }
 
 int	main(int argc, char *argv[])
