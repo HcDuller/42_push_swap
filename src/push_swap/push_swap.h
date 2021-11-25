@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/23 14:34:22 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/24 21:24:40 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,33 @@ t_op_list	*get_last_op_item(t_op_list *any_op_item);
  * if <value> is not found, 
  * returns -1 instead. */
 int			get_index_of(int *array, int array_size, int value);
-void		build_keep_array(t_p_swap *state);
+/* */
+void		build_keep_stack(t_p_swap *state);
+void		optmize_op_list(t_op_list *any_op);
+/**Evaluates if given stack is already sorted (top to bottom, smaller to greater)*/
+int			stack_is_sorted(t_stack stk);
+/**sort stacks of size 3 (yeeeep, that's it)*/
+void		sort_three_sized_stack(t_p_swap *state);
+/** Merge group a and b from stack a to stack b
+ * Params:
+ * a_size, size of group a
+ * b_size, size of group b
+ * group must be on top of group a for this function to properly work.
+*/
+void		merge_into_b(t_p_swap *state, int a_size, int b_size);
+void		merge_into_a(t_p_swap *state, int a_size, int b_size);
+int			count_tuple_elements(t_tuple *map);
+void		mutate_merge_sequence(t_tuple **input);
+void		do_a_merge(t_p_swap *state);
+void		merge_sort(t_p_swap *state);
+int			stack_has_lesses_values_than_pivot(t_stack stk, int pivot);
+t_op_list	*new_operator(t_operator op);
+void		destroy_operator(t_op_list	*op_list);
+t_op_list	*add_operator(t_op_list *last_op, t_operator op);
+int			get_greater_values_in_group(t_p_swap *state, int *first, int *second);
+void		coupled_pas(t_p_swap *state);
+void		push_region_to_b(t_p_swap *state, int pivot_value);
+void		section_sort_from_region(t_p_swap *state);
+void		quick_heap_sort(t_p_swap *state);
+void	swap_int_array_values(int *arr, int a, int b);
 #endif

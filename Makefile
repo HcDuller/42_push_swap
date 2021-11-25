@@ -45,8 +45,27 @@ PS_SRC_NAMES	=	is_space.c \
 					get_last_op_item.c \
 					print_operations.c \
 					get_index_of.c \
-					build_keep_array.c \
-					get_stack_top.c
+					build_keep_stack.c \
+					get_stack_top.c \
+					optmize_op_list.c \
+					stack_is_sorted.c \
+					sort_three_sized_stack.c \
+					merge_into_b.c \
+					merge_into_a.c \
+					count_tuple_elements.c \
+					mutate_merge_sequence.c \
+					do_a_merge.c \
+					merge_sort.c \
+					stack_has_lesses_values_than_pivot.c \
+					new_operator.c \
+					destroy_operator.c \
+					add_operator.c \
+					get_greater_values_in_group.c \
+					coupled_pas.c \
+					push_region_to_b.c \
+					section_sort_from_region.c \
+					quick_heap_sort.c \
+					swap_int_array_values.c \
 
 BONUS_SRC		=	checker.c
 
