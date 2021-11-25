@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 13:26:47 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/16 13:50:02 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:59:44 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	build_base_merge_list(t_p_swap *state)
 	i[1] = 0;
 	if (state->a.size > 3)
 	{
-		while (i[1]< state->a.size)
+		while (i[1] < state->a.size)
 		{
 			if (state->a.size - i[1] > 3 || state->a.size - i[1] == 2)
 			{
 				state->map[i[0]].a = 1;
 				state->map[i[0]].b = 1;
 			}
-			else if (state->a.size - i[1] ==  3)
+			else if (state->a.size - i[1] == 3)
 			{
 				state->map[0].a++;
 				i[1]++;

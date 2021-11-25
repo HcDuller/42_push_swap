@@ -6,31 +6,15 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:30:47 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/25 16:46:59 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:13:34 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int		*build_array_of_indexes(t_stack *src);
-void	add_next_keep_while(t_stack *keep, t_stack *src, t_stack *temp);
-void	find_best_sequence_in_a(t_p_swap *state);
-void	build_keep_stack(t_p_swap *state);
-
-static int	*build_array_of_indexes(t_stack *src)
-{
-	int	*indexes;
-	int	i;
-
-	indexes = ft_calloc(src->size, sizeof(int));
-	i = 0;
-	while (i < src->size)
-	{
-		indexes[i] = get_index_of(src->stack, src->size, i);
-		i++;
-	}
-	return (indexes);
-}
+void		add_next_keep_while(t_stack *keep, t_stack *src, t_stack *temp);
+void		find_best_sequence_in_a(t_p_swap *state);
+void		build_keep_stack(t_p_swap *state);
 
 static int	*initialize_values(t_stack *src, int *current_k, int *next_k)
 {
@@ -42,9 +26,17 @@ static int	*initialize_values(t_stack *src, int *current_k, int *next_k)
 	return (indexes);
 }
 
+static void	manage_end_of_chain(t_stack *tmp, t_stack *kp, int *c_k, int *n_k)
+{
+	if (tmp->top > kp->top)
+		copy_stack_a_to_b(tmp, kp);
+	*n_k = get_stack_top(tmp) + 1;
+	pop_from_stack(tmp);
+	*c_k = get_stack_top(tmp);
+}
+
 void	add_next_keep_while(t_stack *keep, t_stack *src, t_stack *temp)
 {
-	int	i[2];
 	int	current_k;
 	int	next_k;
 	int	*indexes;
@@ -53,9 +45,7 @@ void	add_next_keep_while(t_stack *keep, t_stack *src, t_stack *temp)
 	push_to_stack(temp, current_k);
 	while (temp->stack[1] != src->top)
 	{
-		i[0] = indexes[current_k];
-		i[1] = indexes[next_k];
-		if (i[1] < i[0])
+		if (indexes[next_k] < indexes[current_k])
 		{
 			push_to_stack(temp, next_k);
 			current_k = next_k;
@@ -63,18 +53,7 @@ void	add_next_keep_while(t_stack *keep, t_stack *src, t_stack *temp)
 		}
 		else
 		{
-			if (next_k + 1 < src->size)
-			{
-				next_k++;
-			}
-			else
-			{
-				if (temp->top > keep->top)
-					copy_stack_a_to_b(temp, keep);
-				next_k = get_stack_top(temp) + 1;
-				pop_from_stack(temp);
-				current_k = get_stack_top(temp);
-			}
+			manage_end_of_chain(temp, keep, &current_k, &next_k);
 		}
 	}
 	free(indexes);

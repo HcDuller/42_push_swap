@@ -6,13 +6,13 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 15:25:20 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/05 15:25:35 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:59:13 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int		push_to_stack(t_stack	*stack, int element)
+int	push_to_stack(t_stack	*stack, int element)
 {
 	stack->top++;
 	if (stack->top < stack->size)

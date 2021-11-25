@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/25 16:02:25 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:13:40 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,4 +173,5 @@ void		find_resonable_sequence_in_a(t_p_swap *state);
 void		copy_stack_a_to_b(t_stack *a, t_stack *b);
 void		heap_sort_by_greater(t_stack *src, int *indexes, int *greater);
 void		position_zero_at_top(t_stack *stk);
+int			*build_array_of_indexes(t_stack *src);
 #endif

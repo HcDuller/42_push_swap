@@ -6,13 +6,13 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 17:54:38 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/23 20:38:52 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:45:25 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void		destroy_op_list(t_op_list **any_op_item)
+void	destroy_op_list(t_op_list **any_op_item)
 {
 	t_op_list	*aux_item;
 	t_op_list	*swapper;

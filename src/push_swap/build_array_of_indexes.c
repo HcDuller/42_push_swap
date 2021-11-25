@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_op_item.c                                   :+:      :+:    :+:   */
+/*   build_array_of_indexes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 17:54:23 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/25 19:00:29 by hde-camp         ###   ########.fr       */
+/*   Created: 2021/11/25 17:13:14 by hde-camp          #+#    #+#             */
+/*   Updated: 2021/11/25 17:13:44 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-t_op_list	*create_op_item(t_operator operator)
+int	*build_array_of_indexes(t_stack *src)
 {
-	t_op_list	*new_item;
+	int	*indexes;
+	int	i;
 
-	new_item = ft_calloc(1, sizeof(t_op_list));
-	new_item->next = NULL;
-	new_item->previous = NULL;
-	new_item->operator = operator;
-	return (new_item);
+	indexes = ft_calloc(src->size, sizeof(int));
+	i = 0;
+	while (i < src->size)
+	{
+		indexes[i] = get_index_of(src->stack, src->size, i);
+		i++;
+	}
+	return (indexes);
 }

@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:39:35 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/23 15:43:24 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:58:25 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	optmize_op_list(t_op_list *any_op)
 {
-
 	if (any_op)
 	{
 		while (any_op->previous != NULL)

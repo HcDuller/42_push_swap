@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:45:05 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/23 15:45:41 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:45:52 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int	stack_is_sorted(t_stack stk)
 			return (0);
 		top--;
 	}
-	return	(1);
+	return (1);
 }

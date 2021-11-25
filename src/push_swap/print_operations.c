@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:56:55 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/18 17:34:04 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:46:18 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_op_list	*first_item(t_op_list	*any_op_item)
 	return (first);
 }
 
-void		print_op_list(t_op_list	*any_op_item)
+void	print_op_list(t_op_list	*any_op_item)
 {
 	char		*printable[11];
 	t_op_list	*op;

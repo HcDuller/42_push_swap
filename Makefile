@@ -69,7 +69,8 @@ PS_SRC_NAMES	=	is_space.c \
 					find_resonable_sequence_in_a.c \
 					copy_stack_a_to_b.c \
 					heap_sort_by_greater.c \
-					position_zero_at_top.c
+					position_zero_at_top.c \
+					build_array_of_indexes.c
 
 BONUS_SRC		=	checker.c
 

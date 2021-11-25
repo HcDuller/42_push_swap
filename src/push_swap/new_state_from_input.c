@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 15:27:43 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/24 21:24:45 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/25 19:15:56 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,24 @@ void	sort_array(int *array, int size)
 
 void	replace_stack_values(t_p_swap *state)
 {
-	int	stack_index;
-	int	correct_place;
+	int		i;
+	int		correct_place;
+	int		*ordered;
+	t_stack	*stk;
 
-	stack_index = 0;
-	while (stack_index <= state->a.top)
+	i = 0;
+	stk = &(state->a);
+	ordered = state->ordered_stack;
+	while (i <= state->a.top)
 	{
-		correct_place = get_index_of(state->ordered_stack, state->a.size, state->a.stack[stack_index]);
-		state->a.stack[stack_index] = correct_place;
-		state->keeper.stack[stack_index] = correct_place;
-		stack_index++;
+		correct_place = get_index_of(ordered, stk->size, stk->stack[i]);
+		stk->stack[i] = correct_place;
+		state->keeper.stack[i] = correct_place;
+		i++;
 	}
 }
 
-int		*array_from_stack(t_stack a)
+int	*array_from_stack(t_stack a)
 {
 	int	*array;
 	int	i;
@@ -73,7 +77,7 @@ int		*array_from_stack(t_stack a)
 	return (array);
 }
 
-int		*ordered_array_from_stack(t_stack	a)
+int	*ordered_array_from_stack(t_stack	a)
 {
 	int	*input_array;
 
@@ -82,12 +86,10 @@ int		*ordered_array_from_stack(t_stack	a)
 	return (input_array);
 }
 
-
-
 t_p_swap	new_state_from_input(int argc, char *argv[])
 {
 	t_p_swap	state;
-	int		is_ok;
+	int			is_ok;
 
 	if (argc == 1)
 	{
