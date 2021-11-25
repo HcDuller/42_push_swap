@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/25 15:15:55 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:02:25 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,16 @@ int			stack_has_lesses_values_than_pivot(t_stack stk, int pivot);
 t_op_list	*new_operator(t_operator op);
 void		destroy_operator(t_op_list	*op_list);
 t_op_list	*add_operator(t_op_list *last_op, t_operator op);
+/**
+ * @brief Mutates <first> and <second> into distances from top to first 
+ * and second greater elements.
+ * @param state<t_p_swap*> State of the process 
+ * (must already have dilimiter groups of elements to be iterated over).
+ * @param first<int*> will be mutated into the distance from stack_top 
+ * to the greater value within the group.
+ * @param second<int*> will be mutated into the distance from stack_top 
+ * to the second greater value within the search group.
+ */
 int			get_greater_values_in_group(t_p_swap *state, \
 			int *first, int *second);
 void		coupled_pas(t_p_swap *state);
