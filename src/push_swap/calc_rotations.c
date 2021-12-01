@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 21:03:30 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/30 19:45:37 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:13:17 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static	void	rotations_up(t_stack *stk, int target, int *r)
 		i--;
 		n++;
 	}
-	*r = -1;
+	*r = 0;
 }
 
 static	void	rotations_down(t_stack *stk, int target, int *rr)
@@ -51,7 +51,7 @@ static	void	rotations_down(t_stack *stk, int target, int *rr)
 		}
 		i++;
 	}
-	*rr = -1;
+	*rr = 0;
 }
 
 void	calc_rotations(t_stack *stk, int target, int *r, int *rr)

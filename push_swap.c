@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/30 21:45:45 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/01 17:50:44 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ static void	execute_best_cost(t_p_swap *state, t_cost_to_insert **costs)
 	int best;
 
 	best = get_best_cost_i(costs, state->b.top);
-	execute_cost(state, costs[best]);
+	execute_cost(state, costs[best]); //executando sempre a primeira opcao
 }
 
 static void rotate_as_needed(t_p_swap *state)
@@ -204,19 +204,32 @@ static int	stack_has_value_above(t_stack *stk, t_stack *keeper, int value)
 	return (0);
 }
 
-void	quick_merge_sort(t_p_swap *state)
+void	push_allowed_to_b(t_p_swap *state)
 {
-	int	i;
-	int	top_value;
-	int	keep_i;
-	int	section;
-	t_cost_to_insert **costs;
+	int i;
+	int top_value;
+	int keep_i;
 
-
-	build_keep_stack(state);
 	i = state->a.top;
+	while (i > -1)
+	{
+		top_value = get_stack_top(&(state->a));
+		keep_i = get_index_of(state->keeper.stack, state->keeper.top + 1, top_value);
+		if (keep_i == -1)
+			pb(state);
+		else
+			ra(state);
+		i--;
+	}
+}
+
+void	push_allowed_sectors_to_b(t_p_swap *state)
+{
+	int top_value;
+	int section;
+	int keep_i;
+
 	section = state->a.size * 0.5;
-	
 	while (state->a.top > state->keeper.top)
 	{
 		while (stack_has_value_above(&(state->a), &(state->keeper), section))
@@ -235,19 +248,21 @@ void	quick_merge_sort(t_p_swap *state)
 		}
 		section += state->a.size * 0.1;
 	}
+}
+
+void	quick_merge_sort(t_p_swap *state)
+{
+	int	top_value;
+	int	section;
+	t_cost_to_insert **costs;
+
+	build_keep_stack(state);
 	
-	/*
-	while (i > -1)
-	{
-		top_value = get_stack_top(&(state->a));
-		keep_i = get_index_of(state->keeper.stack, state->keeper.top + 1, top_value);
-		if (keep_i == -1)
-			pb(state);
-		else
-			ra(state);
-		i--;
-	}
-	*/
+	
+	//while (state->a.top > -1)
+	//	pb(state);
+	push_allowed_sectors_to_b(state);	
+	//push_allowed_to_b(state);
 	
 	costs = start_cost_array(state->max_value);
 	while (state->b.top > -1)
@@ -257,7 +272,7 @@ void	quick_merge_sort(t_p_swap *state)
 		clean_cost_array(costs, state->max_value);
 	}
 	rotate_as_needed(state);
-	//destroy_cost_array(costs, state->max_value);
+	destroy_cost_array(costs, state->max_value);
 }
 
 int	main(int argc, char *argv[])
@@ -275,8 +290,9 @@ int	main(int argc, char *argv[])
 		//quick_heap_sort(&state);
 		quick_merge_sort(&state);
 	}
-	optmize_op_list(state.operations);
+	//optmize_op_list(state.operations);
 	print_op_list(state.operations);
+	//print_state(state);
 	destroy_state(&state);
 	return (0);
 }
