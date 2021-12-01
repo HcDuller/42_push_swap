@@ -4,7 +4,7 @@ BONUS_NAME		=	checker
 CC				=	clang
 AR				=	ar -rcs
 RM				=	rm -rfd
-CFLAGS			=	-g -Wall -Wextra -Werror
+CFLAGS			=	-g
 
 
 LIBS_DIR		=	libs
@@ -70,7 +70,11 @@ PS_SRC_NAMES	=	is_space.c \
 					copy_stack_a_to_b.c \
 					heap_sort_by_greater.c \
 					position_zero_at_top.c \
-					build_array_of_indexes.c
+					build_array_of_indexes.c \
+					calc_rotations.c \
+					get_target.c \
+					calc_insert_cost.c \
+					clean_cost_struct.c
 
 BONUS_SRC		=	checker.c
 

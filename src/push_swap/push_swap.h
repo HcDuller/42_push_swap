@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/25 17:13:40 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:14:36 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,23 @@ typedef enum e_operator
 	RRB,
 	RRR
 }	t_operator;
+
+typedef struct s_cost_to_insert
+{
+	int	ra;
+	int	rb;
+	int	rra;
+	int	rrb;
+	int	rr;
+	int	rrr;
+	int	sa;
+	int	sb;
+	int	ss;
+	int	pa;
+	int	pb;
+	int	total_cost;
+} t_cost_to_insert;
+
 
 typedef struct s_op_list
 {
@@ -66,6 +83,7 @@ typedef struct s_p_swap
 	int			*ordered_stack;
 	int			keeper_cap;
 	int			moves;
+	int			max_value;
 }	t_p_swap;
 
 int			is_space(char c);
@@ -174,4 +192,24 @@ void		copy_stack_a_to_b(t_stack *a, t_stack *b);
 void		heap_sort_by_greater(t_stack *src, int *indexes, int *greater);
 void		position_zero_at_top(t_stack *stk);
 int			*build_array_of_indexes(t_stack *src);
+/**
+ * @brief determines number of rotations<r> or reverse-rotations<rr> 
+ * in order to place target value<target> on top of stack<stk>.
+ * @param stk (t_stack) *stk is the stack to iterate over.
+ * @param target (int)Is the value that should be placed on top of stk.
+ * @param r (int *)will receive the number of rotations needed.
+ * @param rr (int *)will receive the number of reverse rotations needed.
+ */
+void	calc_rotations(t_stack *stk, int target, int *r, int *rr);
+/**
+ * @brief Find the desirable target to place on top of a pre-ordered
+ * stack before sending elements to it.
+ * @param stk (t_stack) in which a target will be found
+ * @param value (int) Value to be sent to stack <stk>
+ * @param max_value (int) Greatest value in both stacks A and B	
+ * @return Return the value of the target on given stack;
+ */
+int		get_target(t_stack *stk, int value, int max_value);
+void	calc_insert_cost(t_p_swap *state, t_cost_to_insert *cost, int value);
+void	clean_cost_struct(t_cost_to_insert *cost);
 #endif

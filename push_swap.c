@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/25 13:08:16 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/30 21:45:45 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,178 @@ void	push_filtered_region_to_b(t_p_swap *state, int pivot_value)
 	}
 }
 
+static t_cost_to_insert	**start_cost_array(int size)
+{
+	t_cost_to_insert	**costs;
+
+	costs = ft_calloc(size, sizeof(t_cost_to_insert *));
+	while (size > -1)
+	{
+		costs[size] = ft_calloc(1,sizeof(t_cost_to_insert));
+		costs[size]->pa = 0;
+		costs[size]->pb = 0;
+		costs[size]->ra = 0;
+		costs[size]->rb = 0;
+		costs[size]->rra = 0;
+		costs[size]->rrb = 0;
+		costs[size]->rr = 0;
+		costs[size]->rrr = 0;
+		costs[size]->sa = 0;
+		costs[size]->sb = 0;
+		costs[size]->ss = 0;
+		costs[size]->total_cost = 0;
+		size--;
+	}
+	return (costs);
+}
+
+static void	destroy_cost_array(t_cost_to_insert **costs, int size)
+{
+	int i;
+
+	i = 0;
+	while (i <= size)
+	{
+		(*(costs + i)) = NULL;
+		i++;
+	}	
+	//free(costs);
+}
+
+static void	clean_cost_array(t_cost_to_insert **costs, int size)
+{
+	while (size > -1)
+	{
+		clean_cost_struct(costs[size]);
+		size--;
+	}
+}
+
+static void	build_cost_array(t_p_swap *state, t_cost_to_insert **costs)
+{
+	int	i;
+
+	i = state->b.top;
+	while (i > -1)
+	{
+		calc_insert_cost(state, costs[i], state->b.stack[i]);
+		i--;
+	}
+}
+
+static int	get_best_cost_i(t_cost_to_insert **costs, int b_top)
+{
+	int best;
+	int	i;
+
+	best = b_top;
+	i = b_top;
+	while (i > -1)
+	{
+		if (costs[i]->total_cost < costs[best]->total_cost)
+			best = i;
+		i--;
+	}
+	return (best);
+}
+
+static	void	execute_cost(t_p_swap *state, t_cost_to_insert *cost)
+{
+	while (cost->ra-- > 0)
+		ra(state);
+	while (cost->rb-- > 0)
+		rb(state);
+	while (cost->rra-- > 0)
+		rra(state);
+	while (cost->rrb-- > 0)
+		rrb(state);
+	while (cost->rr-- > 0)
+		rr(state);
+	while (cost->rrr-- > 0)
+		rrr(state);
+	while (cost->pa-- > 0)
+		pa(state);
+	while (cost->pb-- > 0)
+		pb(state);
+}
+
+static void	execute_best_cost(t_p_swap *state, t_cost_to_insert **costs)
+{
+	int best;
+
+	best = get_best_cost_i(costs, state->b.top);
+	execute_cost(state, costs[best]);
+}
+
+static void rotate_as_needed(t_p_swap *state)
+{
+	int z_index;
+	int distance;
+
+	z_index = get_index_of(state->a.stack, state->a.size, 0);
+	distance = state->a.top - z_index;
+	if (distance > z_index)
+	{
+		while (state->a.stack[state->a.top] != 0)
+			rra(state);
+	}
+	else
+	{
+		while (state->a.stack[state->a.top] != 0)
+			ra(state);
+	}
+}
+
+static int	stack_has_value_above(t_stack *stk, t_stack *keeper, int value)
+{
+	int i;
+
+	i = 0;
+	while (i <= stk->top)
+	{
+		if (stk->stack[i] <= value)
+		{
+			if (get_index_of(keeper->stack, keeper->size, stk->stack[i]) == -1)
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	quick_merge_sort(t_p_swap *state)
 {
 	int	i;
 	int	top_value;
 	int	keep_i;
+	int	section;
+	t_cost_to_insert **costs;
+
 
 	build_keep_stack(state);
 	i = state->a.top;
+	section = state->a.size * 0.5;
+	
+	while (state->a.top > state->keeper.top)
+	{
+		while (stack_has_value_above(&(state->a), &(state->keeper), section))
+		{
+			top_value = get_stack_top(&(state->a));
+			if (top_value <= section)
+			{
+				keep_i = get_index_of(state->keeper.stack, state->keeper.top + 1, top_value);
+				if (keep_i == -1)
+					pb(state);
+				else
+					ra(state);
+			}
+			else
+				ra(state);
+		}
+		section += state->a.size * 0.1;
+	}
+	
+	/*
 	while (i > -1)
 	{
 		top_value = get_stack_top(&(state->a));
@@ -83,6 +247,17 @@ void	quick_merge_sort(t_p_swap *state)
 			ra(state);
 		i--;
 	}
+	*/
+	
+	costs = start_cost_array(state->max_value);
+	while (state->b.top > -1)
+	{
+		build_cost_array(state, costs);
+		execute_best_cost(state, costs);
+		clean_cost_array(costs, state->max_value);
+	}
+	rotate_as_needed(state);
+	//destroy_cost_array(costs, state->max_value);
 }
 
 int	main(int argc, char *argv[])
@@ -102,7 +277,6 @@ int	main(int argc, char *argv[])
 	}
 	optmize_op_list(state.operations);
 	print_op_list(state.operations);
-	//print_state(state);
 	destroy_state(&state);
 	return (0);
 }

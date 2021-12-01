@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 15:27:43 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/25 19:15:56 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/11/30 14:15:35 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ t_p_swap	new_state_from_input(int argc, char *argv[])
 		state.operations = NULL;
 		state.keeper_cap = -1;
 		state.moves = 0;
+		state.max_value = argc - 1;
 		while (argc >= 1)
 		{
 			push_to_stack(&state.a, strict_atoi(argv[argc], &is_ok));
