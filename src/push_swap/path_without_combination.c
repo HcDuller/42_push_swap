@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 14:12:31 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 14:18:33 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/02 14:30:02 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ static int	*array_of_greater_elements(t_stack *src)
 	return (greater_el);
 }
 
+static void	start_values(int **indexes, int **greater, t_stack *src)
+{
+	*indexes = build_seq_array(src->size);
+	*greater = array_of_greater_elements(src);
+	heap_sort_by_greater(src, *indexes, *greater);
+}
+
 void	path_without_combination(t_stack *keep, t_stack *src)
 {
 	int	*indexes;
@@ -57,9 +64,7 @@ void	path_without_combination(t_stack *keep, t_stack *src)
 	int	index;
 	int	c;
 
-	indexes = build_seq_array(src->size);
-	greater = array_of_greater_elements(src);
-	heap_sort_by_greater(src, indexes, greater);
+	start_values(&indexes, &greater, src);
 	c = src->top;
 	push_to_stack(keep, src->stack[c]);
 	real_value = src->stack[c];

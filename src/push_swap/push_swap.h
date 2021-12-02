@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 14:15:32 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/02 14:32:46 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ typedef struct s_cost_to_insert
 	int	pa;
 	int	pb;
 	int	total_cost;
-} t_cost_to_insert;
-
+}	t_cost_to_insert;
 
 typedef struct s_op_list
 {
@@ -200,7 +199,7 @@ int			*build_array_of_indexes(t_stack *src);
  * @param r (int *)will receive the number of rotations needed.
  * @param rr (int *)will receive the number of reverse rotations needed.
  */
-void	calc_rotations(t_stack *stk, int target, int *r, int *rr);
+void		calc_rotations(t_stack *stk, int target, int *r, int *rr);
 /**
  * @brief Find the desirable target to place on top of a pre-ordered
  * stack before sending elements to it.
@@ -209,9 +208,9 @@ void	calc_rotations(t_stack *stk, int target, int *r, int *rr);
  * @param max_value (int) Greatest value in both stacks A and B	
  * @return Return the value of the target on given stack;
  */
-int		get_target(t_stack *stk, int value, int max_value);
-void	calc_insert_cost(t_p_swap *state, t_cost_to_insert *cost, int value);
-void	clean_cost_struct(t_cost_to_insert *cost);
+int			get_target(t_stack *stk, int value, int max_value);
+void		calc_insert_cost(t_p_swap *state, t_cost_to_insert *cost, int value);
+void		clean_cost_struct(t_cost_to_insert *cost);
 /**
  * @brief Finds the longest ordered stack within an unordered stack,
  * it does not uses combinations, it scales linearly.
@@ -219,5 +218,5 @@ void	clean_cost_struct(t_cost_to_insert *cost);
  * @param keep The stack which will receive the best elements found.
  * @param src  The origin from which elements will be searched.
  */
-void	path_without_combination(t_stack *keep, t_stack *src);
+void		path_without_combination(t_stack *keep, t_stack *src);
 #endif

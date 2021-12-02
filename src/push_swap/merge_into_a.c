@@ -6,11 +6,58 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:49:13 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/23 15:49:26 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:42:47 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
+
+static void	b_is_grater_than_zero(t_p_swap *state, t_stack *stk, \
+									int *a_size, int *b_size)
+{
+	int	aux;
+
+	if (stk->stack[stk->top] > stk->stack[stk->top - *a_size])
+	{
+		pa(state);
+		*a_size -= 1;
+	}
+	else
+	{
+		aux = *a_size;
+		while (aux > 0)
+		{
+			rb(state);
+			aux -= 1;
+		}
+		pa(state);
+		*b_size -= 1;
+		while (aux < *a_size)
+		{
+			rrb(state);
+			aux += 1;
+		}
+	}
+}
+
+static void	a_is_grater_than_zero(t_p_swap *state, t_stack *stk, \
+									int *a_size, int *b_size)
+{
+	int	aux;
+
+	if (*b_size > 0)
+	{
+		b_is_grater_than_zero(state, stk, a_size, b_size);
+	}
+	else
+	{
+		while (*a_size > 0)
+		{
+			pa(state);
+			*a_size -= 1;
+		}
+	}
+}
 
 void	merge_into_a(t_p_swap *state, int a_size, int b_size)
 {
@@ -26,38 +73,7 @@ void	merge_into_a(t_p_swap *state, int a_size, int b_size)
 	{
 		if (a_size > 0)
 		{
-			if (b_size > 0)
-			{
-				if (stk->stack[stk->top] > stk->stack[stk->top - a_size])
-				{
-					pa(state);
-					a_size--;
-				}
-				else
-				{
-					aux = a_size;
-					while (aux > 0)
-					{
-						rb(state);
-						aux--;
-					}
-					pa(state);
-					b_size--;
-					while (aux < a_size)
-					{
-						rrb(state);
-						aux++;
-					}
-				}
-			}
-			else
-			{
-				while (a_size > 0)
-				{
-					pa(state);
-					a_size--;
-				}
-			}
+			a_is_grater_than_zero(state, stk, &a_size, &b_size);
 		}
 		else
 		{
