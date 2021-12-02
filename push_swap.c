@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 14:40:01 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/02 16:38:47 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,8 +292,8 @@ int	main(int argc, char *argv[])
 		sort_three_sized_stack(&state);
 	else if (state.a.size > 3)
 	{
-		merge_sort(&state);
-		//quick_heap_sort(&state);
+		//merge_sort(&state);
+		quick_heap_sort(&state);
 		//quick_selection(&state);
 	}
 	optmize_op_list(state.operations);
