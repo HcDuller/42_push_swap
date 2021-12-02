@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/30 16:14:36 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/02 14:15:32 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,4 +212,12 @@ void	calc_rotations(t_stack *stk, int target, int *r, int *rr);
 int		get_target(t_stack *stk, int value, int max_value);
 void	calc_insert_cost(t_p_swap *state, t_cost_to_insert *cost, int value);
 void	clean_cost_struct(t_cost_to_insert *cost);
+/**
+ * @brief Finds the longest ordered stack within an unordered stack,
+ * it does not uses combinations, it scales linearly.
+ * 
+ * @param keep The stack which will receive the best elements found.
+ * @param src  The origin from which elements will be searched.
+ */
+void	path_without_combination(t_stack *keep, t_stack *src);
 #endif

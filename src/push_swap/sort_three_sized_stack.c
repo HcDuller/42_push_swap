@@ -6,20 +6,60 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:47:51 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/23 15:47:59 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/02 12:55:36 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
+static void	zero_started(t_p_swap *state)
+{
+	t_stack	*s;
+
+	s = &state->a;
+	if (s->stack[1] > s->stack[0])
+	{
+		sa(state);
+		ra(state);
+	}
+}
+
+static void	one_started(t_p_swap *state)
+{
+	t_stack	*s;
+
+	s = &state->a;
+	if (s->stack[1] > s->stack[0])
+		rra(state);
+	else
+	{
+		sa(state);
+	}
+}
+
+static void	two_started(t_p_swap *state)
+{
+	t_stack	*s;
+
+	s = &state->a;
+	if (s->stack[1] > s->stack[0])
+	{
+		sa(state);
+		rra(state);
+	}
+	else
+		ra(state);
+}
+
 void	sort_three_sized_stack(t_p_swap *state)
 {
-	pb(state);
-	if (state->a.stack[1] > state->a.stack[0])
-		sa(state);
-	pa(state);
-	if (state->a.stack[2] > state->a.stack[0])
-		ra(state);
-	else if (state->a.stack[2] > state->b.stack[1])
-		sa(state);
+	int	top_value;
+
+	top_value = get_stack_top(&(state->a));
+	if (top_value == 0)
+		zero_started(state);
+	else if (top_value == 1)
+		one_started(state);
+	else
+		two_started(state);
 }

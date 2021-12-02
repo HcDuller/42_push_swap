@@ -5,3 +5,6 @@ push_swap
 !push_swap/
 checker
 pyviz.py
+tester.sh
+3_s_tester.sh
+test.txt

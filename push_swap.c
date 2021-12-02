@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/01 17:50:44 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/02 12:59:04 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,26 @@ void	push_filtered_region_to_b(t_p_swap *state, int pivot_value)
 static t_cost_to_insert	**start_cost_array(int size)
 {
 	t_cost_to_insert	**costs;
+	int					i;
 
 	costs = ft_calloc(size, sizeof(t_cost_to_insert *));
-	while (size > -1)
+	i = 0;
+	while (i < size)
 	{
-		costs[size] = ft_calloc(1,sizeof(t_cost_to_insert));
-		costs[size]->pa = 0;
-		costs[size]->pb = 0;
-		costs[size]->ra = 0;
-		costs[size]->rb = 0;
-		costs[size]->rra = 0;
-		costs[size]->rrb = 0;
-		costs[size]->rr = 0;
-		costs[size]->rrr = 0;
-		costs[size]->sa = 0;
-		costs[size]->sb = 0;
-		costs[size]->ss = 0;
-		costs[size]->total_cost = 0;
-		size--;
+		costs[i] = ft_calloc(1, sizeof(t_cost_to_insert));
+		costs[i]->pa = 0;
+		costs[i]->pb = 0;
+		costs[i]->ra = 0;
+		costs[i]->rb = 0;
+		costs[i]->rra = 0;
+		costs[i]->rrb = 0;
+		costs[i]->rr = 0;
+		costs[i]->rrr = 0;
+		costs[i]->sa = 0;
+		costs[i]->sb = 0;
+		costs[i]->ss = 0;
+		costs[i]->total_cost = 0;
+		i++;
 	}
 	return (costs);
 }
@@ -95,12 +97,12 @@ static void	destroy_cost_array(t_cost_to_insert **costs, int size)
 	int i;
 
 	i = 0;
-	while (i <= size)
+	while (i < size)
 	{
-		(*(costs + i)) = NULL;
+		free(costs[i]);
 		i++;
 	}	
-	//free(costs);
+	free(costs);
 }
 
 static void	clean_cost_array(t_cost_to_insert **costs, int size)
@@ -225,11 +227,15 @@ void	push_allowed_to_b(t_p_swap *state)
 
 void	push_allowed_sectors_to_b(t_p_swap *state)
 {
-	int top_value;
-	int section;
-	int keep_i;
+	int	top_value;
+	int	section;
+	int	keep_i;
+	int	increment;
 
-	section = state->a.size * 0.5;
+	section = state->a.size * 0.50;
+	increment = state->a.size * 0.1;
+	if (increment == 0)
+		increment = 1;
 	while (state->a.top > state->keeper.top)
 	{
 		while (stack_has_value_above(&(state->a), &(state->keeper), section))
@@ -246,11 +252,11 @@ void	push_allowed_sectors_to_b(t_p_swap *state)
 			else
 				ra(state);
 		}
-		section += state->a.size * 0.1;
+		section += increment;
 	}
 }
 
-void	quick_merge_sort(t_p_swap *state)
+void	quick_selection(t_p_swap *state)
 {
 	int	top_value;
 	int	section;
@@ -264,7 +270,7 @@ void	quick_merge_sort(t_p_swap *state)
 	push_allowed_sectors_to_b(state);	
 	//push_allowed_to_b(state);
 	
-	costs = start_cost_array(state->max_value);
+	costs = start_cost_array(state->max_value + 1);
 	while (state->b.top > -1)
 	{
 		build_cost_array(state, costs);
@@ -272,7 +278,7 @@ void	quick_merge_sort(t_p_swap *state)
 		clean_cost_array(costs, state->max_value);
 	}
 	rotate_as_needed(state);
-	destroy_cost_array(costs, state->max_value);
+	destroy_cost_array(costs, state->max_value + 1);
 }
 
 int	main(int argc, char *argv[])
@@ -288,11 +294,10 @@ int	main(int argc, char *argv[])
 	{
 		//merge_sort(&state);
 		//quick_heap_sort(&state);
-		quick_merge_sort(&state);
+		quick_selection(&state);
 	}
-	//optmize_op_list(state.operations);
+	optmize_op_list(state.operations);
 	print_op_list(state.operations);
-	//print_state(state);
 	destroy_state(&state);
 	return (0);
 }

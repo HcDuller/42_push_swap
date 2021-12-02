@@ -74,7 +74,8 @@ PS_SRC_NAMES	=	is_space.c \
 					calc_rotations.c \
 					get_target.c \
 					calc_insert_cost.c \
-					clean_cost_struct.c
+					clean_cost_struct.c \
+					path_without_combination.c
 
 BONUS_SRC		=	checker.c
 
