@@ -79,7 +79,15 @@ PS_SRC_NAMES	=	is_space.c \
 					eval_ra_rrb.c \
 					eval_rrb_rra.c \
 					eval_rb_rra.c \
-					copy_cost.c
+					copy_cost.c \
+					push_filtered_region_to_b.c \
+					push_allowed_sectors_to_b.c \
+					quick_selection.c \
+					get_best_cost_i.c \
+					start_cost_array.c \
+					destroy_cost_array.c \
+					clean_cost_array.c \
+					build_cost_array.c
 
 BONUS_SRC		=	checker.c
 

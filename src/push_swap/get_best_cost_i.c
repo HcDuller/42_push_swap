@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   get_best_cost_i.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 22:31:38 by hde-camp         ###   ########.fr       */
+/*   Created: 2021/12/02 22:03:14 by hde-camp          #+#    #+#             */
+/*   Updated: 2021/12/02 22:12:30 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int	main(int argc, char *argv[])
+int	get_best_cost_i(t_cost_to_insert **costs, int b_top)
 {
-	t_p_swap	state;
-	
-	state = new_state_from_input(argc, argv);
-	if (state.a.size == 2)
-		sort_two_sized_stack(&state);
-	else if (state.a.size == 3)
-		sort_three_sized_stack(&state);
-	else if (state.a.size > 3)
+	int	best;
+	int	i;
+
+	best = b_top;
+	i = b_top;
+	while (i > -1)
 	{
-		//merge_sort(&state);
-		quick_selection(&state);
+		if (costs[i]->total_cost < costs[best]->total_cost)
+			best = i;
+		i--;
 	}
-	optmize_op_list(state.operations);
-	print_op_list(state.operations);
-	destroy_state(&state);
-	return (0);
+	return (best);
 }
