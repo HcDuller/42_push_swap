@@ -6,11 +6,28 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 13:26:47 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/25 17:59:44 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/02 19:54:32 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
+
+void	conditional_chunk(t_p_swap *state, int *i)
+{
+	if (state->a.size - i[1] > 3 || state->a.size - i[1] == 2)
+	{
+		state->map[i[0]].a = 1;
+		state->map[i[0]].b = 1;
+	}
+	else if (state->a.size - i[1] == 3)
+	{
+		state->map[0].a++;
+		i[1]++;
+		sort_two_sized_stack(state);
+		state->map[i[0]].a = 1;
+		state->map[i[0]].b = 1;
+	}
+}
 
 void	build_base_merge_list(t_p_swap *state)
 {
@@ -22,19 +39,7 @@ void	build_base_merge_list(t_p_swap *state)
 	{
 		while (i[1] < state->a.size)
 		{
-			if (state->a.size - i[1] > 3 || state->a.size - i[1] == 2)
-			{
-				state->map[i[0]].a = 1;
-				state->map[i[0]].b = 1;
-			}
-			else if (state->a.size - i[1] == 3)
-			{
-				state->map[0].a++;
-				i[1]++;
-				sort_two_sized_stack(state);
-				state->map[i[0]].a = 1;
-				state->map[i[0]].b = 1;
-			}
+			conditional_chunk(state, i);
 			i[1] = i[1] + state->map[i[0]].a + state->map[i[0]].b;
 			state->map[i[0]].direction = TO_B;
 			i[0]++;

@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quick_heap_sort.c                                  :+:      :+:    :+:   */
+/*   replace_stack_values.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:57:57 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/23 15:58:04 by hde-camp         ###   ########.fr       */
+/*   Created: 2021/12/02 20:58:11 by hde-camp          #+#    #+#             */
+/*   Updated: 2021/12/02 20:59:36 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	quick_heap_sort(t_p_swap *state)
+void	replace_stack_values(t_p_swap *state)
 {
-	int	last_index;
-	int	pivot_index;
-	int	drecrement;
-	int	*ordered;
+	int		i;
+	int		correct_place;
+	int		*ordered;
+	t_stack	*stk;
 
-	last_index = state->a.top;
+	i = 0;
+	stk = &(state->a);
 	ordered = state->ordered_stack;
-	drecrement = 0.15 * state->a.size;
-	pivot_index = 0;
-	while (state->a.top > 1)
+	while (i <= state->a.top)
 	{
-		drecrement *= 0.9;
-		if (drecrement < 10)
-			drecrement = 10;
-		pivot_index += drecrement;
-		if (pivot_index > last_index)
-			pivot_index = last_index;
-		push_region_to_b(state, ordered[pivot_index]);
+		correct_place = get_index_of(ordered, stk->size, stk->stack[i]);
+		stk->stack[i] = correct_place;
+		state->keeper.stack[i] = correct_place;
+		i++;
 	}
-	section_sort_from_region(state);
 }

@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_region_to_b.c                                 :+:      :+:    :+:   */
+/*   max_in_stack.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:57:06 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/23 15:57:15 by hde-camp         ###   ########.fr       */
+/*   Created: 2021/12/02 19:35:32 by hde-camp          #+#    #+#             */
+/*   Updated: 2021/12/02 19:42:52 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	push_region_to_b(t_p_swap *state, int pivot_value)
+int	max_in_stack(t_stack *stk, int value)
 {
-	int	top_value;
+	int	i;
 
-	push_to_stack(&(state->q_s_groups), 0);
-	while (stack_has_lesses_values_than_pivot(state->a, pivot_value))
+	i = stk->top;
+	while (i > -1)
 	{
-		top_value = get_stack_top(&(state->a));
-		if (top_value < pivot_value)
-		{
-			pb(state);
-			state->q_s_groups.stack[state->q_s_groups.top]++;
-		}
-		else
-			ra(state);
+		if (stk->stack[i] > value)
+			return (0);
+		i--;
 	}
+	return (1);
 }

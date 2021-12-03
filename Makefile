@@ -56,15 +56,9 @@ PS_SRC_NAMES	=	is_space.c \
 					mutate_merge_sequence.c \
 					do_a_merge.c \
 					merge_sort.c \
-					stack_has_lesses_values_than_pivot.c \
 					new_operator.c \
 					destroy_operator.c \
 					add_operator.c \
-					get_greater_values_in_group.c \
-					coupled_pas.c \
-					push_region_to_b.c \
-					section_sort_from_region.c \
-					quick_heap_sort.c \
 					swap_int_array_values.c \
 					find_resonable_sequence_in_a.c \
 					copy_stack_a_to_b.c \
@@ -75,7 +69,17 @@ PS_SRC_NAMES	=	is_space.c \
 					get_target.c \
 					calc_insert_cost.c \
 					clean_cost_struct.c \
-					path_without_combination.c
+					path_without_combination.c \
+					max_in_stack.c \
+					min_in_stack.c \
+					heap_sort_array.c \
+					replace_stack_values.c \
+					get_min.c \
+					eval_ra_rb.c \
+					eval_ra_rrb.c \
+					eval_rrb_rra.c \
+					eval_rb_rra.c \
+					copy_cost.c
 
 BONUS_SRC		=	checker.c
 

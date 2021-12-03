@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove_item_from_op_list.c                         :+:      :+:    :+:   */
+/*   eval_rb_rra.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 18:05:24 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 17:15:16 by hde-camp         ###   ########.fr       */
+/*   Created: 2021/12/02 21:16:45 by hde-camp          #+#    #+#             */
+/*   Updated: 2021/12/02 21:22:04 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-t_op_list	*remove_item_from_op_list(t_op_list	*any_operator)
+int	eval_rb_rra(t_cost_to_insert *cost, int replace)
 {
-	t_op_list	*previous;
-	t_op_list	*next;
+	t_cost_to_insert	temp_cost;
+	int					tot;
 
-	if (any_operator != NULL)
-	{
-		previous = any_operator->previous;
-		next = any_operator->next;
-		previous->next = next;
-		next->previous = previous;
-		free(any_operator);
-		if (next)
-			return (next);
-		return (previous);
-	}
-	return (NULL);
+	tot = 0;
+	tot += cost->rb;
+	tot += cost->rra;
+	tot += cost->pa;
+	tot += cost->pb;
+	clean_cost_struct(&temp_cost);
+	temp_cost.rb = cost->rb;
+	temp_cost.rra = cost->rra;
+	temp_cost.pa = cost->pa;
+	temp_cost.pb = cost->pb;
+	temp_cost.total_cost = tot;
+	if (replace == 1)
+		copy_cost(&(temp_cost), cost);
+	return (tot);
 }

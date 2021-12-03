@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 14:32:46 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/02 21:36:00 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,32 +165,26 @@ int			count_tuple_elements(t_tuple *map);
 void		mutate_merge_sequence(t_tuple **input);
 void		do_a_merge(t_p_swap *state);
 void		merge_sort(t_p_swap *state);
-int			stack_has_lesses_values_than_pivot(t_stack stk, int pivot);
+//int			stack_has_lesses_values_than_pivot(t_stack stk, int pivot);
 t_op_list	*new_operator(t_operator op);
 void		destroy_operator(t_op_list	*op_list);
 t_op_list	*add_operator(t_op_list *last_op, t_operator op);
-/**
- * @brief Mutates <first> and <second> into distances from top to first 
- * and second greater elements.
- * @param state<t_p_swap*> State of the process 
- * (must already have dilimiter groups of elements to be iterated over).
- * @param first<int*> will be mutated into the distance from stack_top 
- * to the greater value within the group.
- * @param second<int*> will be mutated into the distance from stack_top 
- * to the second greater value within the search group.
- */
-int			get_greater_values_in_group(t_p_swap *state, \
-			int *first, int *second);
-void		coupled_pas(t_p_swap *state);
-void		push_region_to_b(t_p_swap *state, int pivot_value);
-void		section_sort_from_region(t_p_swap *state);
-void		quick_heap_sort(t_p_swap *state);
 void		swap_int_array_values(int *arr, int a, int b);
 void		find_resonable_sequence_in_a(t_p_swap *state);
 void		copy_stack_a_to_b(t_stack *a, t_stack *b);
 void		heap_sort_by_greater(t_stack *src, int *indexes, int *greater);
 void		position_zero_at_top(t_stack *stk);
 int			*build_array_of_indexes(t_stack *src);
+int			max_in_stack(t_stack *stk, int value);
+int			min_in_stack(t_stack *stk, int value);
+void		heap_sort_array(int *array, int size);
+void		replace_stack_values(t_p_swap *state);
+int			get_min(int a, int b);
+int			eval_rrb_rra(t_cost_to_insert *cost, int replace);
+int			eval_ra_rrb(t_cost_to_insert *cost, int replace);
+int			eval_rb_rra(t_cost_to_insert *cost, int replace);
+int			eval_ra_rb(t_cost_to_insert *cost, int replace);
+void		copy_cost(t_cost_to_insert *src, t_cost_to_insert *dest);
 /**
  * @brief determines number of rotations<r> or reverse-rotations<rr> 
  * in order to place target value<target> on top of stack<stk>.
@@ -209,7 +203,6 @@ void		calc_rotations(t_stack *stk, int target, int *r, int *rr);
  * @return Return the value of the target on given stack;
  */
 int			get_target(t_stack *stk, int value, int max_value);
-void		calc_insert_cost(t_p_swap *state, t_cost_to_insert *cost, int value);
 void		clean_cost_struct(t_cost_to_insert *cost);
 /**
  * @brief Finds the longest ordered stack within an unordered stack,
@@ -219,4 +212,6 @@ void		clean_cost_struct(t_cost_to_insert *cost);
  * @param src  The origin from which elements will be searched.
  */
 void		path_without_combination(t_stack *keep, t_stack *src);
+void		calc_insert_cost(t_p_swap *state, \
+t_cost_to_insert *cost, int value);
 #endif

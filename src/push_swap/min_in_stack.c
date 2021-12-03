@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_has_lesses_values_than_pivot.c               :+:      :+:    :+:   */
+/*   min_in_stack.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:52:22 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/25 17:46:35 by hde-camp         ###   ########.fr       */
+/*   Created: 2021/12/02 19:34:46 by hde-camp          #+#    #+#             */
+/*   Updated: 2021/12/02 19:35:04 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int	stack_has_lesses_values_than_pivot(t_stack stk, int pivot)
+int	min_in_stack(t_stack *stk, int value)
 {
 	int	i;
 
-	i = 0;
-	while (i <= stk.top)
+	i = stk->top;
+	while (i > -1)
 	{
-		if (stk.stack[i] < pivot)
-			return (1);
-		i++;
+		if (stk->stack[i] < value)
+			return (0);
+		i--;
 	}
-	return (0);
+	return (1);
 }

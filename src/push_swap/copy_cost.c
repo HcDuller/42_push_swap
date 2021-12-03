@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove_item_from_op_list.c                         :+:      :+:    :+:   */
+/*   copy_cost.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 18:05:24 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 17:15:16 by hde-camp         ###   ########.fr       */
+/*   Created: 2021/12/02 21:20:54 by hde-camp          #+#    #+#             */
+/*   Updated: 2021/12/02 21:21:09 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-t_op_list	*remove_item_from_op_list(t_op_list	*any_operator)
+void	copy_cost(t_cost_to_insert *src, t_cost_to_insert *dest)
 {
-	t_op_list	*previous;
-	t_op_list	*next;
-
-	if (any_operator != NULL)
-	{
-		previous = any_operator->previous;
-		next = any_operator->next;
-		previous->next = next;
-		next->previous = previous;
-		free(any_operator);
-		if (next)
-			return (next);
-		return (previous);
-	}
-	return (NULL);
+	dest->pa = src->pa;
+	dest->pb = src->pb;
+	dest->ra = src->ra;
+	dest->rb = src->rb;
+	dest->rra = src->rra;
+	dest->rrb = src->rrb;
+	dest->rr = src->rr;
+	dest->rrr = src->rrr;
+	dest->sa = src->sa;
+	dest->sb = src->sb;
+	dest->ss = src->ss;
+	dest->total_cost = src->total_cost;
 }

@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 16:38:47 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/02 21:14:26 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,13 +263,8 @@ void	quick_selection(t_p_swap *state)
 	t_cost_to_insert **costs;
 
 	build_keep_stack(state);
-	
-	
-	//while (state->a.top > -1)
-	//	pb(state);
 	push_allowed_sectors_to_b(state);	
 	//push_allowed_to_b(state);
-	
 	costs = start_cost_array(state->max_value + 1);
 	while (state->b.top > -1)
 	{
@@ -293,8 +288,7 @@ int	main(int argc, char *argv[])
 	else if (state.a.size > 3)
 	{
 		//merge_sort(&state);
-		quick_heap_sort(&state);
-		//quick_selection(&state);
+		quick_selection(&state);
 	}
 	optmize_op_list(state.operations);
 	print_op_list(state.operations);
