@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:01:07 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 22:12:01 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/03 18:01:25 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ static void	rotate_as_needed(t_p_swap *state)
 
 void	quick_selection(t_p_swap *state)
 {
-	int					top_value;
-	int					section;
 	t_cost_to_insert	**costs;
 
 	build_keep_stack(state);

@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:48:46 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 15:57:23 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/03 14:51:27 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	push_second_group_value(t_p_swap *state, int *a_size, int *b_size)
 
 static void	non_zero_a(t_p_swap *state, int *a_size, int *a_i, int *b_size)
 {
-	int		aux;
 	t_stack	*stk;
 
 	stk = &state->a;
@@ -64,7 +63,6 @@ void	merge_into_b(t_p_swap *state, int a_size, int b_size)
 {
 	int		a_i;
 	int		b_i;
-	int		aux;
 	t_stack	*stk;
 
 	a_i = state->a.top;

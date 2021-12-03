@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 22:34:42 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/03 18:44:24 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,12 @@ void				clean_cost_struct(t_cost_to_insert *cost);
  * @param src  The origin from which elements will be searched.
  */
 void				path_without_combination(t_stack *keep, t_stack *src);
+void				radix_sort(t_p_swap *state);
 void				push_filtered_region_to_b(t_p_swap *state, int pivot_value);
+int					get_next_cost(t_cost_to_insert **costs, int top_i, \
+int current_i);
+int					get_prev_cost(t_cost_to_insert **costs, int top_i, \
+int current_i);
 void				calc_insert_cost(t_p_swap *state, \
 t_cost_to_insert *cost, int value);
 void				heap_sort_by_greater(t_stack *src, int *indexes, \

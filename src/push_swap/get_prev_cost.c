@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   get_prev_cost.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/03 19:15:25 by hde-camp         ###   ########.fr       */
+/*   Created: 2021/12/03 18:33:23 by hde-camp          #+#    #+#             */
+/*   Updated: 2021/12/03 18:33:32 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int	main(int argc, char *argv[])
+int	get_prev_cost(t_cost_to_insert **costs, int top_i, int current_i)
 {
-	t_p_swap	state;
-	
-	state = new_state_from_input(argc, argv);
-	if (state.a.size == 2)
-		sort_two_sized_stack(&state);
-	else if (state.a.size == 3)
-		sort_three_sized_stack(&state);
-	else if (state.a.size > 3)
-	{
-		//merge_sort(&state);
-		quick_selection(&state);
-	}
-	optmize_op_list(state.operations);
-	print_op_list(state.operations);
-	destroy_state(&state);
-	return (0);
+	int	prev;
+
+	if (top_i < 3)
+		return (0);
+	if (current_i == top_i)
+		prev = 0;
+	else
+		prev = current_i + 1;
+	return (costs[prev]->total_cost);
 }

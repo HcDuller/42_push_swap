@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:49:13 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 15:42:47 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/03 14:51:49 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static void	b_is_grater_than_zero(t_p_swap *state, t_stack *stk, \
 static void	a_is_grater_than_zero(t_p_swap *state, t_stack *stk, \
 									int *a_size, int *b_size)
 {
-	int	aux;
-
 	if (*b_size > 0)
 	{
 		b_is_grater_than_zero(state, stk, a_size, b_size);
@@ -63,7 +61,6 @@ void	merge_into_a(t_p_swap *state, int a_size, int b_size)
 {
 	int		a_i;
 	int		b_i;
-	int		aux;
 	t_stack	*stk;
 
 	a_i = state->b.top;
