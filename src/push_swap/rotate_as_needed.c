@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove_item_from_op_list.c                         :+:      :+:    :+:   */
+/*   rotate_as_needed.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 18:05:24 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/04 18:24:16 by hde-camp         ###   ########.fr       */
+/*   Created: 2021/12/04 17:05:51 by hde-camp          #+#    #+#             */
+/*   Updated: 2021/12/04 17:06:06 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-t_op_list	*remove_item_from_op_list(t_op_list	*any_operator)
+void	rotate_as_needed(t_p_swap *state)
 {
-	t_op_list	*previous;
-	t_op_list	*next;
+	int	z_index;
+	int	distance;
 
-	if (any_operator != NULL)
+	z_index = get_index_of(state->a.stack, state->a.size, 0);
+	distance = state->a.top - z_index;
+	if (distance > z_index)
 	{
-		previous = any_operator->previous;
-		next = any_operator->next;
-		if (previous)
-			previous->next = next;
-		if (next)
-			next->previous = previous;
-		free(any_operator);
-		if (next)
-			return (next);
-		if (previous)
-			return (previous);
-		return (NULL);
+		while (state->a.stack[state->a.top] != 0)
+			rra(state);
 	}
-	return (NULL);
+	else
+	{
+		while (state->a.stack[state->a.top] != 0)
+			ra(state);
+	}
 }

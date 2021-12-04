@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcduller <hcduller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 15:07:00 by hcduller          #+#    #+#             */
-/*   Updated: 2021/05/27 16:45:59 by hcduller         ###   ########.fr       */
+/*   Updated: 2021/12/04 12:48:43 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ char	*ft_strdup(const char *s1)
 		ptr[l--] = 0;
 		while (l + 1 >= 1)
 		{
-			 ptr[l] = s1[l];
-			 l--;
+			ptr[l] = s1[l];
+			l--;
 		}
 		return (ptr);
 	}

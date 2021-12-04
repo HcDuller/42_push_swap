@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/03 18:44:24 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/04 18:10:22 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,14 +126,19 @@ void				destroy_state(t_p_swap *state);
 void				build_base_merge_list(t_p_swap *state);
 /**sort stacks of size 2 (yeeeep, that's it)*/
 void				sort_two_sized_stack(t_p_swap *state);
+/**sort stacks of size 3 (yeeeep, that's it)*/
+void				sort_three_sized_stack(t_p_swap *state);
+void				sort_four_sized(t_p_swap *state);
+void				sort_five_sized(t_p_swap *state);
 t_op_list			*create_op_item(t_operator operator);
 t_op_list			*add_to_op_list(t_op_list *last_operator, \
 t_operator new_operator);
-/**Remove an operation from the list.
- * returns: Next operator, if it exists, if not:
- * 			Previous Operator, if it exists, if not
- * 			NULL
-*/
+/**
+ * @brief Revome an item from the op_list
+ * 
+ * @param any_operator <*t_op_list> the operator to be removed from the list
+ * @return The next operator in the list if it exists. Null if it doest.
+ */
 t_op_list			*remove_item_from_op_list(t_op_list	*any_operator);
 void				print_op_list(t_op_list	*any_op_item);
 void				destroy_op_list(t_op_list **any_op_item);
@@ -148,12 +153,10 @@ t_op_list			*get_last_op_item(t_op_list *any_op_item);
 int					get_index_of(int *array, int array_size, int value);
 /* */
 void				build_keep_stack(t_p_swap *state);
-void				optmize_op_list(t_op_list *any_op);
+void				optmize_op_list(t_op_list *any_op, t_op_list **destroy);
 /**Evaluates if given stack is already sorted 
  * (top to bottom, smaller to greater)*/
 int					stack_is_sorted(t_stack stk);
-/**sort stacks of size 3 (yeeeep, that's it)*/
-void				sort_three_sized_stack(t_p_swap *state);
 /** Merge group a and b from stack a to stack b
  * Params:
  * a_size, size of group a
@@ -190,6 +193,7 @@ int					get_best_cost_i(t_cost_to_insert **costs, int b_top);
 void				destroy_cost_array(t_cost_to_insert **costs, int size);
 void				clean_cost_array(t_cost_to_insert **costs, int size);
 void				build_cost_array(t_p_swap *state, t_cost_to_insert **costs);
+void				rotate_as_needed(t_p_swap *state);
 t_cost_to_insert	**start_cost_array(int size);
 /**
  * @brief determines number of rotations<r> or reverse-rotations<rr> 
@@ -220,6 +224,7 @@ void				clean_cost_struct(t_cost_to_insert *cost);
 void				path_without_combination(t_stack *keep, t_stack *src);
 void				radix_sort(t_p_swap *state);
 void				push_filtered_region_to_b(t_p_swap *state, int pivot_value);
+void				execute_best_cost(t_p_swap *state, t_cost_to_insert **costs);
 int					get_next_cost(t_cost_to_insert **costs, int top_i, \
 int current_i);
 int					get_prev_cost(t_cost_to_insert **costs, int top_i, \

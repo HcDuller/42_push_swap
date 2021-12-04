@@ -90,7 +90,11 @@ PS_SRC_NAMES	=	is_space.c \
 					build_cost_array.c \
 					get_next_cost.c \
 					get_prev_cost.c \
-					radix_sort.c
+					radix_sort.c \
+					sort_four_sized.c \
+					sort_five_sized.c \
+					rotate_as_needed.c \
+					execute_best_cost.c
 
 BONUS_SRC		=	checker.c
 

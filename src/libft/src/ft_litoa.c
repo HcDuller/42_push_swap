@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:06:58 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/07/07 17:11:53 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/04 12:49:07 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_litoa(unsigned long n)
 {
 	unsigned long	len;
 	unsigned long	i;
-	char	*p;
+	char			*p;
 
 	len = r_len(n);
 	i = len;
