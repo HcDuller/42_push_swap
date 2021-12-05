@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:47:51 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/04 13:08:30 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/05 02:06:05 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	sort_three_sized_stack(t_p_swap *state)
 	if (n[0] < n[1] && n[0] < n[2])
 		zero_started(state);
 	else if (n[0] > n[1] && n[0] > n[2])
-		two_started(state); 
+		two_started(state);
 	else
 		one_started(state);
 }

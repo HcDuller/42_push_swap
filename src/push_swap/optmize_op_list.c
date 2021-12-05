@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:39:35 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/04 19:18:26 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/05 02:02:03 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_op_list	*remove_vertical_redundancy(t_op_list *any_op)
 {
 	t_op_list	*output;
+
 	if (any_op)
 	{
 		if (any_op->next)
@@ -42,6 +43,7 @@ t_op_list	*remove_vertical_redundancy(t_op_list *any_op)
 t_op_list	*remove_horizontal_redundancy(t_op_list *any_op)
 {
 	t_op_list	*output;
+
 	if (any_op)
 	{
 		if (any_op->next)
@@ -75,16 +77,17 @@ void	optmize_op_list(t_op_list *any_op, t_op_list **destroy)
 		{
 			any_op = remove_vertical_redundancy(any_op);
 			any_op = remove_horizontal_redundancy(any_op);
+			any_op = combine_vertical_moves(any_op);
 			if (any_op)
 			{
 				if (any_op->next == NULL)
-					break;
+					break ;
 				any_op = any_op->next;
 			}
 			else
 			{
 				*destroy = NULL;
-				break;
+				break ;
 			}
 		}
 	}

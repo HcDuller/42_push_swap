@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/04 18:10:22 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/05 02:06:27 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void				sort_three_sized_stack(t_p_swap *state);
 void				sort_four_sized(t_p_swap *state);
 void				sort_five_sized(t_p_swap *state);
 t_op_list			*create_op_item(t_operator operator);
+t_op_list			*combine_vertical_moves(t_op_list *any_op);
 t_op_list			*add_to_op_list(t_op_list *last_operator, \
 t_operator new_operator);
 /**
@@ -224,7 +225,8 @@ void				clean_cost_struct(t_cost_to_insert *cost);
 void				path_without_combination(t_stack *keep, t_stack *src);
 void				radix_sort(t_p_swap *state);
 void				push_filtered_region_to_b(t_p_swap *state, int pivot_value);
-void				execute_best_cost(t_p_swap *state, t_cost_to_insert **costs);
+void				execute_best_cost(t_p_swap *state, \
+t_cost_to_insert **costs);
 int					get_next_cost(t_cost_to_insert **costs, int top_i, \
 int current_i);
 int					get_prev_cost(t_cost_to_insert **costs, int top_i, \

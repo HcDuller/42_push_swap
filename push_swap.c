@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/04 19:37:48 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/05 02:07:27 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char *argv[])
 	if (!stack_is_sorted(state.a))
 	{
 		if (state.a.size == 2)
-		sort_two_sized_stack(&state);
+			sort_two_sized_stack(&state);
 		else if (state.a.size == 3)
 			sort_three_sized_stack(&state);
 		else if (state.a.size == 4)

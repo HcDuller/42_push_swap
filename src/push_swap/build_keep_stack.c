@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:30:47 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 00:02:28 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/05 01:14:31 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	add_next_keep_while(t_stack *keep, t_stack *src, t_stack *temp)
 	push_to_stack(temp, current_k);
 	while (temp->stack[1] != src->top)
 	{
-		if (indexes[next_k] < indexes[current_k])
+		if (indexes[next_k] < indexes[current_k] && next_k < temp->size)
 		{
 			push_to_stack(temp, next_k);
 			current_k = next_k;

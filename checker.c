@@ -6,82 +6,88 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:51:52 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/11/16 12:38:07 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/05 00:38:08 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
+#include <get_next_line.h>
 
 void	manual_checker(t_p_swap *state)
 {
-	char	buf[4];
+	//char	buf[4];
+	char	**buf;
 	int		l;
 
+	buf = ft_calloc(1, sizeof(char *));
 	while (1)
 	{
-		ft_bzero(&buf, 4);
-		read(0, &buf, 4);
-		buf[3] = 0;
-		replace_nl(&buf[0]);
-		l = ft_strlen(buf);
+		//ft_bzero(&buf, 4);
+		//read(0, &buf, 4);
+		//buf[3] = 0;
+		//replace_nl(&buf[0]);
+		get_next_line(1, buf);
+		l = ft_strlen(*buf);
 		if (l > 1)
 		{
-			if (buf[0] == 's')
+			if ((*buf)[0] == 's')
 			{
-				if (buf[1] == 'a')
+				if ((*buf)[1] == 'a')
 					sa(state);
-				else if (buf[1] == 'b')
+				else if ((*buf)[1] == 'b')
 					sb(state);
-				else if (buf[1] == 's')
+				else if ((*buf)[1] == 's')
 					ss(state);
 			}
-			else if (buf[0] == 'p')
+			else if ((*buf)[0] == 'p')
 			{
-				if (buf[1] == 'a')
+				if ((*buf)[1] == 'a')
 					pa(state);
-				else if (buf[1] == 'b')
+				else if ((*buf)[1] == 'b')
 					pb(state);
 			}
-			else if (buf[0] == 'r')
+			else if ((*buf)[0] == 'r')
 			{
 				if (l < 3)
 				{
-					if (buf[1] == 'a')
+					if ((*buf)[1] == 'a')
 						ra(state);
-					else if (buf[1] == 'b')
+					else if ((*buf)[1] == 'b')
 						rb(state);
-					else if (buf[1] == 'r')
+					else if ((*buf)[1] == 'r')
 						rr(state);
 				}
-				else if (buf[1] == 'r')
+				else if ((*buf)[1] == 'r')
 				{
-					if (buf[2] == 'a')
+					if ((*buf)[2] == 'a')
 						rra(state);
-					else if (buf[2] == 'b')
+					else if ((*buf)[2] == 'b')
 						rrb(state);
-					else if (buf[2] == 'r')
+					else if ((*buf)[2] == 'r')
 						rrr(state);
 				}
 			}
+			free(*buf);
+			*buf = NULL;
 		}
-		ft_putstr_fd("[a]:\t", 1);
-		print_stack(state->a);
-		ft_putstr_fd("[b]:\t", 1);
-		print_stack(state->b);
+		print_state(*state);
+		//ft_putstr_fd("[a]:\t", 1);
+		//print_stack(state->a);
+		//ft_putstr_fd("[b]:\t", 1);
+		//print_stack(state->b);
 	}
 }
 
 int	main(int argc, char *argv[])
 {
-	int			argc_i;
-	int			is_ok;
-	int			buf;
 	t_p_swap	state;
 
-	state = new_state_from_input(argc, argv);
-	print_stack(state.a);
-	manual_checker(&state);
-	destroy_stack(&state.a);
-	destroy_stack(&state.b);
+	if (argc > 1)
+	{
+		state = new_state_from_input(argc, argv);
+		print_stack(state.a);
+		manual_checker(&state);
+		destroy_state(&state);
+	}
 	return (0);
 }

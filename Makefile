@@ -13,7 +13,8 @@ SRC_DIR			=	src
 OBJ_DIR			=	obj
 PS_DIR			=	push_swap
 
-
+GNL_SRC			=	get_next_line.c \
+					get_next_line_utils.c
 PS_SRC_NAMES	=	is_space.c \
 					strict_atoi.c \
 					new_stack.c \
@@ -94,12 +95,14 @@ PS_SRC_NAMES	=	is_space.c \
 					sort_four_sized.c \
 					sort_five_sized.c \
 					rotate_as_needed.c \
-					execute_best_cost.c
+					execute_best_cost.c \
+					combine_vertical_moves.c
 
 BONUS_SRC		=	checker.c
 
 P_S_RAW			=	push_swap.c
 
+GNL_OBJ			=	$(addprefix $(OBJ_DIR)/, $(GNL_SRC:.c=.o))
 PS_OBJ_FILES	=	$(addprefix $(OBJ_DIR)/, $(PS_SRC_NAMES:.c=.o))
 PS_SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(addprefix	$(PS_DIR)/, $(PS_SRC_NAMES))) 
 P_S_FILES		=	$(addprefix $(PS_DIR)/, $(P_S_RAW))
@@ -114,6 +117,14 @@ bonus: all $(BONUS_NAME)
 $(LIBS_DIR)/libpush_swap.a: $(PS_OBJ_FILES) 
 	$(AR) $@ $(PS_OBJ_FILES)
 
+$(LIBS_DIR)/libgnl.a : $(GNL_OBJ)
+	$(AR) $@ $(GNL_OBJ)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/gnl/%.c
+	@mkdir -p $(INCLUDES_DIR) $(OBJ_DIR)
+	@cp -u $(SRC_DIR)/gnl/get_next_line.h $(INCLUDES_DIR)/get_next_line.h
+	$(CC) $(CFLAGS) -c $< -I$(INCLUDES_DIR) -o $@
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/$(PS_DIR)/%.c
 	@mkdir -p $(INCLUDES_DIR) $(OBJ_DIR)
 	@cp -u $(SRC_DIR)/$(PS_DIR)/push_swap.h $(INCLUDES_DIR)/push_swap.h
@@ -122,8 +133,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/$(PS_DIR)/%.c
 $(NAME): $(LIBS_DIR)/libpush_swap.a $(P_S_RAW)
 	$(CC) $(CFLAGS) $(P_S_RAW) -L./$(LIBS_DIR) -lpush_swap -lft -I$(INCLUDES_DIR) -o $(NAME)
 
-$(BONUS_NAME): $(LIBS_DIR)/libpush_swap.a $(BONUS_SRC)
-	$(CC) $(CFLAGS) $(BONUS_SRC) -L./$(LIBS_DIR) -lpush_swap -lft -I$(INCLUDES_DIR) -o $(BONUS_NAME)
+$(BONUS_NAME): $(LIBS_DIR)/libpush_swap.a $(LIBS_DIR)/libgnl.a $(BONUS_SRC)
+	$(CC) $(CFLAGS) $(BONUS_SRC) -L./$(LIBS_DIR) -lgnl -lpush_swap -lft -I$(INCLUDES_DIR) -o $(BONUS_NAME)
 
 libft: 
 	@mkdir -p $(LIBS_DIR) $(INCLUDES_DIR)
