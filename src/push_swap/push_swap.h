@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/05 02:06:27 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/07 18:09:59 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_p_swap
 	t_stack		keeper;
 	t_tuple		*map;
 	t_op_list	*operations;
+	t_list		*input;
 	int			*ordered_stack;
 	int			keeper_cap;
 	int			moves;

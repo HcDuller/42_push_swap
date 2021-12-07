@@ -31,7 +31,6 @@ PS_SRC_NAMES	=	is_space.c \
 					print_stack.c \
 					print_state.c \
 					new_state_from_input.c \
-					replace_nl.c \
 					sx.c \
 					px.c \
 					rx.c \

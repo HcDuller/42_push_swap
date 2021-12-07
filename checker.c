@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:51:52 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/05 00:38:08 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:46:28 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ void	manual_checker(t_p_swap *state)
 	buf = ft_calloc(1, sizeof(char *));
 	while (1)
 	{
-		//ft_bzero(&buf, 4);
-		//read(0, &buf, 4);
-		//buf[3] = 0;
-		//replace_nl(&buf[0]);
 		get_next_line(1, buf);
 		l = ft_strlen(*buf);
 		if (l > 1)

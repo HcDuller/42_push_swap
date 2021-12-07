@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 15:27:43 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/02 21:08:40 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/07 18:13:13 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,98 @@ void static	start_state(t_p_swap *state, int size)
 	state->max_value = size - 1;
 }
 
+void	*sliced_arg(t_p_swap *state, char *str)
+{
+	int		i;
+	int		l;
+
+	i = 0;
+	l = ft_strlen(str);
+	while (i < l)
+	{
+		while (is_space(str[i]))
+			str[i++] = 0;
+		if (str[i])
+		{
+			if (state->input == NULL)
+				state->input = ft_lstnew(&str[i]);
+			else
+				ft_lstadd_back(&state->input, ft_lstnew(&str[i]));
+			while (i < l)
+			{
+				if (!is_space(str[i]))
+					i++;
+				else
+					break ;
+			}
+		}
+	}
+	return state->input;
+}
+
+static void	exit_error(t_p_swap *state)
+{
+	destroy_state(state);
+	ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
+}
+
+void	destroy_lst(t_list **lst)
+{
+	t_list *aux;
+
+	while (*lst)
+	{
+		aux = (*lst)->next;
+		free(*lst);
+		*lst = aux;
+	}
+}
+
+void	list_to_args(t_p_swap *state, t_list *lst, int *is_ok)
+{
+	int		temp_val;
+	t_list	*aux;
+
+
+	while (lst)
+	{
+		temp_val = strict_atoi(lst->content, is_ok);
+		if (!is_ok)
+		{
+			destroy_lst(&lst);
+			exit_error(state);
+		}
+		aux = lst->next;
+		free(lst);
+		lst = aux;
+		push_to_stack(&state->a, temp_val);
+		push_to_stack(&state->keeper, temp_val);
+	}
+}
+
 void static	read_input(t_p_swap *state, int *argc, char *argv[])
 {
-	int			is_ok;
+	int		is_ok;
+	//int		input_v;
+	t_list	*input_list;
 
 	while (*argc >= 1)
 	{
-		push_to_stack(&state->a, strict_atoi(argv[*argc], &is_ok));
-		push_to_stack(&state->keeper, strict_atoi(argv[*argc], &is_ok));
-		if (!is_ok)
-		{
-			destroy_state(state);
-			ft_putstr_fd("Error: The argument[", 2);
-			ft_putchar_fd(*argv[*argc], 2);
-			ft_putstr_fd("] is invalid.\n", 2);
-			exit(EXIT_FAILURE);
-		}
+		input_list = sliced_arg(state, argv[*argc]);
+		//input_v = strict_atoi(argv[*argc], &is_ok);
+		//if (!is_ok)
+		//{
+		//	destroy_state(state);
+		//	ft_putstr_fd("Error\n", 2);
+		//	exit(EXIT_FAILURE);
+		//}
+		//push_to_stack(&state->a, input_v);
+		//push_to_stack(&state->keeper, input_v);
 		*argc -= 1;
 	}
+	start_state(state, ft_lstsize(state->input));
+	list_to_args(state, input_list, &is_ok);
 }
 
 t_p_swap	new_state_from_input(int argc, char *argv[])
@@ -79,13 +153,14 @@ t_p_swap	new_state_from_input(int argc, char *argv[])
 
 	if (argc == 1)
 	{
-		ft_putstr_fd("At least one argument must be provided.\n", 2);
+		ft_putstr_fd("Error\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		argc--;
-		start_state(&state, argc);
+		state.input = NULL;
+//		start_state(&state, argc);
 		read_input(&state, &argc, argv);
 	}
 	if (argc == 0)
