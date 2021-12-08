@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:57:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/05 02:07:27 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/08 20:26:53 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char *argv[])
 		rotate_as_needed(&state);
 		optmize_op_list(state.operations, &state.operations);
 		print_op_list(state.operations);
-		destroy_state(&state);
 	}
+	destroy_state(&state);
 	return (0);
 }

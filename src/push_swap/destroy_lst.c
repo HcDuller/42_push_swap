@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_array_of_indexes.c                           :+:      :+:    :+:   */
+/*   destroy_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 17:13:14 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/08 18:25:29 by hde-camp         ###   ########.fr       */
+/*   Created: 2021/12/08 20:32:06 by hde-camp          #+#    #+#             */
+/*   Updated: 2021/12/08 20:38:22 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int	*build_array_of_indexes(t_stack *src)
+void	destroy_lst(t_list **lst)
 {
-	int	*indexes;
-	int	i;
+	t_list	*aux;
 
-	indexes = ft_calloc(src->size + 1, sizeof(int));
-	i = 0;
-	while (i < src->size)
+	while (*lst)
 	{
-		indexes[i] = get_index_of(src->stack, src->size, i);
-		i++;
+		aux = (*lst)->next;
+		free(*lst);
+		*lst = aux;
 	}
-	return (indexes);
 }

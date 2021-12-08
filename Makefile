@@ -95,7 +95,11 @@ PS_SRC_NAMES	=	is_space.c \
 					sort_five_sized.c \
 					rotate_as_needed.c \
 					execute_best_cost.c \
-					combine_vertical_moves.c
+					combine_vertical_moves.c \
+					destroy_lst.c \
+					start_state.c \
+					ordered_array_from_stack.c \
+					read_input.c
 
 BONUS_SRC		=	checker.c
 
