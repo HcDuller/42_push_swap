@@ -6,16 +6,28 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 15:27:43 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/08 20:42:00 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:01:57 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
+void	skip_whitespaces(char *str, int *i, int len)
+{
+	while (*i < len)
+	{
+		if (!is_space(str[*i]))
+			*i += 1;
+		else
+			break ;
+	}
+}
+
 void	*sliced_arg(t_p_swap *state, char *str)
 {
 	int		i;
 	int		l;
+	t_list	*lst;
 
 	i = 0;
 	l = ft_strlen(str);
@@ -25,17 +37,11 @@ void	*sliced_arg(t_p_swap *state, char *str)
 			str[i++] = 0;
 		if (str[i])
 		{
-			if (state->input == NULL)
-				state->input = ft_lstnew(&str[i]);
-			else
-				ft_lstadd_back(&state->input, ft_lstnew(&str[i]));
-			while (i < l)
-			{
-				if (!is_space(str[i]))
-					i++;
-				else
-					break ;
-			}
+			lst = ft_lstnew(&str[i]);
+			if (state->input != NULL)
+				ft_lstadd_front(&state->input, lst);
+			state->input = lst;
+			skip_whitespaces(str, &i, l);
 		}
 	}
 	return (state->input);
@@ -60,12 +66,8 @@ t_p_swap	new_state_from_input(int argc, char *argv[])
 	}
 	else
 	{
-		argc--;
 		state.input = NULL;
-		read_input(&state, &argc, argv);
-	}
-	if (argc == 0)
-	{
+		read_input(&state, argc, argv);
 		state.ordered_stack = ordered_array_from_stack(state.a);
 		replace_stack_values(&state);
 	}

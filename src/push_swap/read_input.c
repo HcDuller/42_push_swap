@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:37:30 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/08 20:41:39 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:01:48 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,16 @@ void static	list_to_args(t_p_swap *state, int *is_ok)
 	}
 }
 
-void	read_input(t_p_swap *state, int *argc, char *argv[])
+void	read_input(t_p_swap *state, int argc, char *argv[])
 {
 	int		is_ok;
+	int		arg;
 
-	while (*argc >= 1)
+	arg = 1;
+	while (arg < argc)
 	{
-		state->input = sliced_arg(state, argv[*argc]);
-		*argc -= 1;
+		state->input = sliced_arg(state, argv[arg]);
+		arg++;
 	}
 	start_state(state, ft_lstsize(state->input));
 	list_to_args(state, &is_ok);

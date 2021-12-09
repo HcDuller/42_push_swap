@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/09 13:54:16 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:01:45 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ void				rotate_as_needed(t_p_swap *state);
 void				start_state(t_p_swap *state, int size);
 int					*ordered_array_from_stack(t_stack	a);
 t_cost_to_insert	**start_cost_array(int size);
-void				read_input(t_p_swap *state, int *argc, char *argv[]);
+void				read_input(t_p_swap *state, int argc, char *argv[]);
 void				destroy_lst(t_list **lst);
 void				exit_error(t_p_swap *state);
 void				*sliced_arg(t_p_swap *state, char *str);
