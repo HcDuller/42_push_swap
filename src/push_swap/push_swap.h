@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:01 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/08 20:40:59 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/09 13:54:16 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,10 @@ void				read_input(t_p_swap *state, int *argc, char *argv[]);
 void				destroy_lst(t_list **lst);
 void				exit_error(t_p_swap *state);
 void				*sliced_arg(t_p_swap *state, char *str);
+void				s_handler(t_p_swap *state, char *str, int *is_ok);
+void				p_handler(t_p_swap *state, char *str, int *is_ok);
+void				rr_handler(t_p_swap *state, char *str, int *is_ok);
+void				r_handler(t_p_swap *state, char *str, int *is_ok);
 /**
  * @brief determines number of rotations<r> or reverse-rotations<rr> 
  * in order to place target value<target> on top of stack<stk>.

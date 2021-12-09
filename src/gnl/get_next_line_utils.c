@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:44:03 by hcduller          #+#    #+#             */
-/*   Updated: 2021/06/22 20:54:07 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/09 13:39:42 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,13 @@ char	*pos_break(char *str)
 		aux++;
 	if ((aux - break_index) > 0)
 	{
-		new_str = (char *)ft_calloc((aux - break_index) + 1, 1);
-		aux = new_str;
-		while (*++break_index)
-			*aux++ = *break_index;
+		if (ft_strlen(break_index + 1) > 0)
+		{
+			new_str = (char *)ft_calloc((aux - break_index) + 1, 1);
+			aux = new_str;
+			while (*++break_index)
+				*aux++ = *break_index;
+		}
 	}
 	free(str);
 	return (new_str);

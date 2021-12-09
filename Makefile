@@ -99,7 +99,8 @@ PS_SRC_NAMES	=	is_space.c \
 					destroy_lst.c \
 					start_state.c \
 					ordered_array_from_stack.c \
-					read_input.c
+					read_input.c \
+					check_handlers.c
 
 BONUS_SRC		=	checker.c
 
