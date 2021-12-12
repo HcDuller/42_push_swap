@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 15:27:43 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/09 16:01:57 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/12 16:18:39 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_p_swap	new_state_from_input(int argc, char *argv[])
 
 	if (argc == 1)
 	{
-		ft_putstr_fd("Error\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	else
