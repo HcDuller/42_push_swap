@@ -4,7 +4,7 @@ BONUS_NAME		=	checker
 CC				=	clang
 AR				=	ar -rcs
 RM				=	rm -rfd
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-g -Wall -Wextra -Werror
 
 
 LIBS_DIR		=	libs

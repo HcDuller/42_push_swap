@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:51:52 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/11 13:21:07 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/12 13:50:49 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,23 @@ void static	command_handler(t_p_swap *state, char *buf, int *is_ok)
 		else
 			*is_ok = 2;
 	}
+	else if (l == 0)
+		*is_ok = 0;
 	else
 		*is_ok = 2;
 }
 
 void static	rel(t_p_swap *state, char *buf, int *is_ok)
 {
-	get_next_line(0, &buf);
+	int	i_size;
+
+	i_size = get_next_line(0, &buf);
 	if (buf)
 	{
-		command_handler(state, buf, is_ok);
+		if (i_size == 1)
+			*is_ok = 2;
+		else
+			command_handler(state, buf, is_ok);
 		free(buf);
 	}
 	else

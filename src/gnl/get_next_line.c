@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:44:01 by hcduller          #+#    #+#             */
-/*   Updated: 2021/12/05 00:00:49 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/12 13:47:37 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,16 @@ int	get_next_line(int fd, char **line)
 		{
 			r_size = read(fd, readings, BUFFER_SIZE);
 			if (r_size <= 0)
-				return (str_handler(line, &my_line, r_size, &readings));
+			{
+				str_handler(line, &my_line, r_size, &readings);
+				return (r_size);
+			}
 			my_line = str_append(my_line, readings, 1);
 		}
 		*line = pre_break(my_line);
 		my_line = pos_break(my_line);
 		free(readings);
-		return (1);
+		return (r_size);
 	}
 	return (-1);
 }
