@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 02:06:53 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/12 13:53:53 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:41:50 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include <stdlib.h>
 # include <stddef.h>
 
-# define BUFFER_SIZE 5
+# define BUFFER_SIZE 1
 
 void	*ft_calloc(size_t count, size_t size);
 size_t	ft_strlen(const char *s);
 char	*pre_break(char *str);
 char	*pos_break(char *str);
 int		has_break(char *p);
-int		get_next_line(int fd, char **line);
+int	get_next_line(int fd, char **line, int *total);
 
 #endif

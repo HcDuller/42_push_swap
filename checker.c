@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:51:52 by hde-camp          #+#    #+#             */
-/*   Updated: 2021/12/12 14:10:28 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:43:44 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,38 @@ void static	rel(t_p_swap *state, char *buf, int *is_ok)
 {
 	int	i_size;
 
-	i_size = get_next_line(0, &buf);
-	if (buf && i_size > 0)
+	i_size = 0;
+	get_next_line(0, &buf, &i_size);
+	if (buf)
 	{
-		command_handler(state, buf, is_ok);
+		if (i_size == 3 || i_size == 4)
+		{
+			command_handler(state, buf, is_ok);
+		}
+		else if (i_size == 0)
+			*is_ok = 0;
+		else
+		{
+			//ft_putstr_fd(ft_itoa(i_size), 1);
+			//ft_putstr_fd("there is buf, but len if fucked\n", 1);
+			*is_ok = 2;
+		}
+			
 		free(buf);
 	}
 	else
-	{
 		*is_ok = 0;
-	}
 	buf = NULL;
+	//if (buf && i_size > 0)
+	//{
+	//	command_handler(state, buf, is_ok);
+	//	free(buf);
+	//}
+	//else
+	//{
+	//	*is_ok = 0;
+	//}
+	//buf = NULL;
 }
 
 void static	manual_checker(t_p_swap *state)

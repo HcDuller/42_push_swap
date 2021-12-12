@@ -6,7 +6,7 @@
 /*   By: hde-camp <hde-camp@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:44:01 by hcduller          #+#    #+#             */
-/*   Updated: 2021/12/12 13:47:37 by hde-camp         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:42:35 by hde-camp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	str_handler(char **line, char **my_line, int r_size, char **readings)
 	return (0);
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line, int *total)
 {
 	static char	*my_line;
 	char		*readings;
@@ -116,17 +116,15 @@ int	get_next_line(int fd, char **line)
 		while (!has_break(my_line))
 		{
 			r_size = read(fd, readings, BUFFER_SIZE);
+			*total += r_size;
 			if (r_size <= 0)
-			{
-				str_handler(line, &my_line, r_size, &readings);
-				return (r_size);
-			}
+				return (str_handler(line, &my_line, r_size, &readings));
 			my_line = str_append(my_line, readings, 1);
 		}
 		*line = pre_break(my_line);
 		my_line = pos_break(my_line);
 		free(readings);
-		return (r_size);
+		return (1);
 	}
 	return (-1);
 }
