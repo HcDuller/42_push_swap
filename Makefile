@@ -112,7 +112,7 @@ PS_SRC_FILES	=	$(addprefix $(SRC_DIR)/, $(addprefix	$(PS_DIR)/, $(PS_SRC_NAMES))
 P_S_FILES		=	$(addprefix $(PS_DIR)/, $(P_S_RAW))
 
 
-.PHONY: clean fclean re libft re
+.PHONY: clean fclean re libft re norm
 
 all: libft $(NAME)
 	
@@ -154,3 +154,7 @@ fclean: clean
 	$(RM) $(INCLUDES_DIR) $(LIBS_DIR) $(OBJ_DIR)
 
 re: fclean all
+
+norm:
+	echo -n "Errors found: "
+	@norminette | grep 'Error' | wc -l
