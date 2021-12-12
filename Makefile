@@ -156,5 +156,5 @@ fclean: clean
 re: fclean all
 
 norm:
-	echo -n "Errors found: "
+	@echo -n "Errors found: "
 	@norminette | grep 'Error' | wc -l
