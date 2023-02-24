@@ -15,9 +15,8 @@
 int	count_tuple_elements(t_tuple *map)
 {
 	int	total_elements;
-	int	index;
 
-	index = 0;
+	(void)map;
 	total_elements = 0;
 	map = NULL;
 	return (total_elements);

@@ -59,12 +59,8 @@ static void	a_is_grater_than_zero(t_p_swap *state, t_stack *stk, \
 
 void	merge_into_a(t_p_swap *state, int a_size, int b_size)
 {
-	int		a_i;
-	int		b_i;
 	t_stack	*stk;
 
-	a_i = state->b.top;
-	b_i = state->b.top - a_size;
 	stk = &state->b;
 	while (a_size > 0 || b_size > 0)
 	{

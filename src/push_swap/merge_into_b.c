@@ -62,12 +62,8 @@ static void	non_zero_a(t_p_swap *state, int *a_size, int *a_i, int *b_size)
 void	merge_into_b(t_p_swap *state, int a_size, int b_size)
 {
 	int		a_i;
-	int		b_i;
-	t_stack	*stk;
 
 	a_i = state->a.top;
-	b_i = state->a.top - a_size;
-	stk = &state->a;
 	while (a_size > 0 || b_size > 0)
 	{
 		if (a_size > 0)

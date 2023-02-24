@@ -53,10 +53,8 @@ static void	two_started(t_p_swap *state)
 
 void	sort_three_sized_stack(t_p_swap *state)
 {
-	int	top_value;
 	int	n[3];
 
-	top_value = get_stack_top(&(state->a));
 	n[0] = state->a.stack[state->a.top];
 	n[1] = state->a.stack[state->a.top - 1];
 	n[2] = state->a.stack[state->a.top - 2];
